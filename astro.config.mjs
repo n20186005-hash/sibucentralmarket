@@ -20,7 +20,6 @@ if (SITE_URL) {
 export default defineConfig({
   site: SITE_URL || undefined,
   output: 'static',
-  session: false,
   adapter: cloudflare({
     imageService: 'passthrough',
   }),
