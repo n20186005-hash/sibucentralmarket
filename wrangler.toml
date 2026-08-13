@@ -1,8 +1,9 @@
 name = "burnhamparkbaguio"
 compatibility_date = "2026-08-09"
+main = "./dist/_worker.js/index.js"
 
-# 注意：Astro 7 + Cloudflare 适配器的静态产物路径需指向 dist/client
-assets = { directory = "./dist/client" }
+# Astro Cloudflare 适配器将静态资源输出到 dist 根目录，并通过 ASSETS 绑定读取
+assets = { directory = "./dist", binding = "ASSETS" }
 
 # 如果后续开启了 Cloudflare KV，再取消下方注释并填入 ID
 # [[kv_namespaces]]
