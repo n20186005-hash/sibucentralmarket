@@ -1,0 +1,756 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import {
+  SITE,
+  KEY_INFO,
+  MARKET_SECTIONS,
+  TICKET_INFO,
+  PARKING,
+  TRANSPORT,
+  FOOD_SPOTS,
+  NEARBY_ATTRACTIONS,
+  GALLERY,
+} from '@/consts';
+
+const modeLabels: Record<string, { label: string; icon: string }> = {
+  kapal_terbang: { label: 'Kapal Terbang (SBW)', icon: '✈' },
+  bot: { label: 'Bot Ekspres', icon: '🚢' },
+  bas: { label: 'Bas Bandar', icon: '🚌' },
+  teksi: { label: 'Teksi Bandar', icon: '🚕' },
+  grab: { label: 'Grab / E-Hailing', icon: '📱' },
+  berjalan: { label: 'Berjalan Kaki', icon: '🚶' },
+  kereta: { label: 'Kereta Sendiri', icon: '🚗' },
+};
+
+const priceBadge: Record<string, string> = {
+  murah: 'bg-rajang-100 text-rajang-700',
+  sederhana: 'bg-swan-200 text-teak-700',
+  mewah: 'bg-chilli-100 text-chilli-700',
+};
+
+const priceLabel: Record<string, string> = {
+  murah: 'Ekonomi',
+  sederhana: 'Sederhana',
+  mewah: 'Mewah',
+};
+
+const floorBadge: Record<string, string> = {
+  'Tingkat Bawah': 'bg-rajang-50 text-rajang-700 border-rajang-200',
+  'Tingkat Atas': 'bg-teak-50 text-teak-700 border-teak-200',
+};
+---
+
+<BaseLayout>
+  <!-- SECTION 1: HERO -->
+  <section id="hero" class="relative overflow-hidden">
+    <div class="relative h-[72vh] min-h-[520px] w-full">
+      <img
+        src={GALLERY[0]}
+        alt={SITE.name}
+        class="absolute inset-0 h-full w-full object-cover"
+        loading="eager"
+        width="1600"
+        height="900"
+      />
+      <div class="absolute inset-0 hero-overlay" />
+    </div>
+    <div class="container relative -mt-16 md:-mt-20 pb-6 md:pb-10">
+      <div class="max-w-3xl text-white">
+        <span class="inline-flex items-center gap-2 rounded-full bg-white/15 backdrop-blur border border-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-white/90">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Sibu · Sarawak · Bumi Kenyalang
+        </span>
+        <h1 class="mt-5 font-display text-4xl md:text-6xl font-bold tracking-tight leading-[1.1]">
+          Pasar Sentral Sibu
+        </h1>
+        <p class="mt-2 font-display text-xl md:text-2xl font-semibold tracking-wide text-swan-100/90">
+          Pasar Tertutup TERBESAR di Malaysia · Lebih 1,100 Gerai
+        </p>
+        <p class="mt-5 text-lg md:text-xl leading-relaxed text-white/90 max-w-2xl">
+          {SITE.description}
+        </p>
+        <div class="mt-7 flex flex-wrap items-center gap-3">
+          <a href="#bahagian" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>
+            Teroka Bahagian
+          </a>
+          <a href="#pengangkutan" class="btn-secondary !bg-white/85 !text-rajang-900 hover:!bg-white">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z"/><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m19 16-3-2"/></svg>
+            Cara Ke Sana
+          </a>
+        </div>
+        <div class="mt-7 flex flex-wrap items-center gap-4 text-sm text-white/85">
+          <span class="inline-flex items-center gap-2">
+            <span class="inline-flex gap-0.5 text-amber-300">
+              ★★★★★
+            </span>
+            <span class="font-semibold text-white">{SITE.ratingValue.toFixed(1)}</span>
+            <span>· {SITE.reviewCount.toLocaleString('ms-MY')} ulasan Google</span>
+          </span>
+          <span class="h-4 w-px bg-white/25"></span>
+          <span class="inline-flex items-center gap-1.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            6:00 AM – 6:00 PM · Setiap hari
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: INFO PENTING (KEY INFO CARDS) -->
+  <section id="info-penting" class="scroll-mt-24">
+    <div class="container py-10 md:py-14">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {KEY_INFO.map((k) => (
+          <div class="card p-5 md:p-6">
+            <div class="flex items-start gap-4">
+              <div class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-rajang-100 text-rajang-700">
+                {k.icon === 'ticket' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>
+                )}
+                {k.icon === 'clock' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                )}
+                {k.icon === 'stopwatch' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M9 2h6"/></svg>
+                )}
+                {k.icon === 'sun' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                )}
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="text-xs font-semibold uppercase tracking-wider text-rajang-500">
+                  {k.label}
+                </p>
+                <p class="mt-1 font-display text-lg md:text-xl font-bold text-rajang-900 break-words">
+                  {k.value}
+                </p>
+                <p class="mt-1 text-sm text-rajang-600">{k.sub}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: BAHAGIAN PASAR (Market Sections) -->
+  <section id="bahagian" class="scroll-mt-24 pattern-rajang">
+    <div class="container py-16 md:py-20">
+      <div class="max-w-3xl mb-10 md:mb-12">
+        <span class="section-eyebrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>
+          6 Bahagian Utama · 2 Tingkat
+        </span>
+        <h2 class="section-title mt-3">Susun atur Pasar Sentral Sibu</h2>
+        <p class="mt-3 text-rajang-700 leading-prose">
+          Bangunan 2 tingkat yang menggabungkan bekas Pasar Basah dan Pasar
+          Lembangan (Dayak) asal. Aras bawah untuk hasil segar & basah, aras
+          atas untuk pakaian, makanan, dan Kek Lapis. Navigasi laluan yang
+          luas & berudara baik — sebuah muzium hidup budaya Sibu.
+        </p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {MARKET_SECTIONS.map((p, i) => (
+          <article class="card p-6 hover:shadow-lg transition">
+            <div class="flex items-center justify-between mb-4">
+              <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-teak-100 text-teak-700 font-bold font-display">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span class={`chip-accent border ${floorBadge[p.floor]}`}>
+                {p.floor}
+              </span>
+            </div>
+            <h3 class="font-display text-xl font-bold text-rajang-900 leading-snug">
+              {p.title}
+            </h3>
+            <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-chilli-600">
+              {p.tagline}
+            </p>
+            <p class="mt-2 text-sm text-rajang-700 leading-relaxed">
+              {p.description}
+            </p>
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {p.items.map((it) => (
+                <li class="chip">
+                  {it}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: GALERI (dengan Lightbox) -->
+  <section id="galeri" class="scroll-mt-24">
+    <div class="container py-16 md:py-20">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-12">
+        <div class="max-w-3xl">
+          <span class="section-eyebrow">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            Galeri Gambar · Klik untuk Besar
+          </span>
+          <h2 class="section-title mt-3">Sekitar Pasar Sentral Sibu</h2>
+          <p class="mt-3 text-rajang-700 leading-prose">
+            {GALLERY.length} gambar sebenar Pasar Sentral Sibu — suasana gerai
+            hasil hutan, mi kampua tingkat atas, tradisi ayam dibalut surat
+            khabar, dan landskap Sungai Rejang yang mengiringi kunjungan anda
+            di bandar Angsa (Swan Town).
+          </p>
+        </div>
+      </div>
+
+      <div id="gallery-grid"
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4"
+        data-count={GALLERY.length}
+      >
+        {GALLERY.map((src, i) => (
+          <button
+            type="button"
+            class={`gallery-item group relative overflow-hidden rounded-xl bg-rajang-100 text-left ${
+              i === 0 || i === 8 ? 'md:col-span-2 md:row-span-2 aspect-square' : 'aspect-[4/5]'
+            }`}
+            data-index={i}
+            data-src={src}
+            aria-label={`Buka gambar ${i + 1} — Pasar Sentral Sibu`}
+          >
+            <img
+              src={src}
+              alt={`Gambar ${i + 1} Pasar Sentral Sibu, Sarawak`}
+              loading={i < 4 ? 'eager' : 'lazy'}
+              decoding="async"
+              class="h-full w-full object-cover group-hover:scale-105 transition duration-500"
+              width="800"
+              height="800"
+            />
+            <span class="pointer-events-none absolute bottom-0 left-0 right-0 bg-gradient-to-t from-rajang-950/75 via-rajang-950/20 to-transparent p-3 text-xs font-medium text-white/95 opacity-0 group-hover:opacity-100 transition flex items-center justify-between">
+              <span>Foto #{String(i + 1).padStart(2, '0')}</span>
+              <span class="inline-flex items-center gap-1">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+              </span>
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div
+    id="lightbox"
+    class="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Gambar besar - klik untuk tutup, anak panah untuk navigasi"
+    data-open="false"
+  >
+    <button type="button" class="lightbox-close" aria-label="Tutup gambar" data-action="close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <button type="button" class="lightbox-nav lightbox-prev" aria-label="Gambar sebelumnya" data-action="prev">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <button type="button" class="lightbox-nav lightbox-next" aria-label="Gambar seterusnya" data-action="next">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+    <img id="lightbox-img" src="" alt="" loading="lazy" decoding="async"/>
+  </div>
+
+  <script is:inline define:vars={{ galleryImgs: GALLERY }}>
+  (function () {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const grid = document.getElementById('gallery-grid');
+    const imgs = galleryImgs;
+    let currentIdx = 0;
+
+    function open(i) {
+      currentIdx = (i + imgs.length) % imgs.length;
+      lightboxImg.src = imgs[currentIdx];
+      lightboxImg.alt = 'Gambar ' + (currentIdx + 1) + ' — Pasar Sentral Sibu';
+      lightbox.setAttribute('data-open', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      lightbox.setAttribute('data-open', 'false');
+      document.body.style.overflow = '';
+    }
+    function next() { open(currentIdx + 1); }
+    function prev() { open(currentIdx - 1); }
+
+    if (grid) {
+      grid.addEventListener('click', function (e) {
+        const btn = e.target.closest('.gallery-item');
+        if (!btn) return;
+        open(parseInt(btn.getAttribute('data-index') || '0', 10));
+      });
+    }
+
+    lightbox.addEventListener('click', function (e) {
+      const t = e.target;
+      if (t === lightbox || t.getAttribute && (t.getAttribute('data-action') === 'close')) {
+        close();
+      } else if (t.closest && t.closest('[data-action="close"]')) {
+        close();
+      } else if (t.closest && t.closest('[data-action="next"]')) {
+        next();
+      } else if (t.closest && t.closest('[data-action="prev"]')) {
+        prev();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (lightbox.getAttribute('data-open') !== 'true') return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowRight') next();
+      else if (e.key === 'ArrowLeft') prev();
+    });
+  })();
+  </script>
+
+  <!-- SECTION 5: TIKET & YURAN -->
+  <section id="tiket" class="scroll-mt-24 bg-rajang-50/60">
+    <div class="container py-16 md:py-20">
+      <div class="grid gap-10 lg:grid-cols-12 items-start">
+        <div class="lg:col-span-5">
+          <span class="section-eyebrow">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg>
+            Tiket & Yuran Masuk
+          </span>
+          <h2 class="section-title mt-3">Kemasukan adalah PERCUMA untuk SEMUA</h2>
+          <p class="mt-4 text-rajang-700 leading-prose">
+            Tiada bayaran masuk dikenakan ke atas semua kategori pengunjung.
+            Pasar Sentral Sibu adalah PASAR AWAM yang dibiayai oleh Majlis
+            Bandaraya Sibu (MBS) untuk rakyat dan pelancong. Anda hanya
+            membayar untuk barang belian, parkir, dan makanan sahaja.
+          </p>
+          <div class="mt-6 card p-5 border-swan-200 bg-swan-50/60">
+            <p class="text-sm font-semibold text-swan-800 mb-2">💡 Tips Belian Cekap</p>
+            <ul class="text-sm text-rajang-800 space-y-1.5 leading-relaxed list-disc pl-5">
+              <li>Bawa WANG TUNAI secukupnya — kebanyakan gerai kecil tak terima kad.</li>
+              <li>Tawar harga secara sopan — biasa untuk buah, sayur, dan pakaian.</li>
+              <li>Datang sebelum 10 AM untuk pilihan hasil segar PALING lengkap.</li>
+              <li>Minta resit jika beli Kek Lapis atau barang untuk dihantar.</li>
+              <li>Ubah duit syiling banyak diperlukan untuk belian kecil (RM0.20–RM5).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="lg:col-span-7">
+          <div class="card overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-rajang-100 text-sm">
+                <thead class="bg-rajang-900 text-white">
+                  <tr>
+                    <th scope="col" class="text-left px-5 py-4 font-semibold tracking-wide">Kategori Pengunjung</th>
+                    <th scope="col" class="text-left px-5 py-4 font-semibold tracking-wide">Yuran Masuk</th>
+                    <th scope="col" class="text-left px-5 py-4 font-semibold tracking-wide">Nota & Catatan</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-rajang-100 bg-white">
+                  {TICKET_INFO.map((t) => (
+                    <tr class="hover:bg-swan-50">
+                      <td class="px-5 py-4 font-semibold text-rajang-900">{t.type}</td>
+                      <td class="px-5 py-4">
+                        {t.price === 'Percuma' ? (
+                          <span class="inline-flex items-center gap-2 rounded-full bg-rajang-100 px-3 py-1 text-xs font-bold text-rajang-700">
+                            {t.price}
+                          </span>
+                        ) : (
+                          <span class="inline-flex items-center gap-2 rounded-full bg-chilli-50 px-3 py-1 text-xs font-bold text-chilli-700">
+                            {t.price}
+                          </span>
+                        )}
+                      </td>
+                      <td class="px-5 py-4 text-rajang-700">{t.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: MASA TERBAIK -->
+  <section id="masa-terbaik" class="scroll-mt-24">
+    <div class="container py-16 md:py-20">
+      <div class="max-w-3xl mb-10 md:mb-12">
+        <span class="section-eyebrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Masa Terbaik & Tempoh Lawatan
+        </span>
+        <h2 class="section-title mt-3">Bila & Berapa Lama Sebaiknya?</h2>
+        <p class="mt-3 text-rajang-700 leading-prose">
+          Pasar dibuka sepanjang hari, namun jangka masa tertentu menawarkan
+          pengalaman yang lebih baik. Sibu berada di zon iklim ekuatori —
+          pagi sejuk dan petang sering kali hujan rencana di musim utara.
+        </p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-3">
+        <article class="card p-6 border-t-4 border-t-rajang-500">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-rajang-100 text-rajang-700">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 8 1.45-2.9A2 2 0 0 1 9.24 4H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2Z"/></svg>
+            </span>
+            <h3 class="font-display text-xl font-bold text-rajang-900">Waktu Pagi Segar</h3>
+          </div>
+          <p class="text-xs font-semibold text-teak-600 uppercase tracking-wider">TERBAIK · ⭐⭐⭐⭐⭐</p>
+          <p class="mt-2 font-bold text-rajang-900">7:00 AM – 10:00 AM</p>
+          <ul class="mt-3 text-sm text-rajang-700 space-y-1.5 list-disc pl-5">
+            <li>Hasil segar baru tiba dari pekan & sungai Rejang</li>
+            <li>Buah-buahan pilihan, ikan sungai baru diturunkan</li>
+            <li>Kurang sesak — ruang luas untuk memilih</li>
+            <li>Udara pagi Sibu masih sejuk & nyaman berjalan</li>
+          </ul>
+        </article>
+
+        <article class="card p-6 border-t-4 border-teak-500">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-teak-100 text-teak-700">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/></svg>
+            </span>
+            <h3 class="font-display text-xl font-bold text-rajang-900">Makan & Mi Kampua</h3>
+          </div>
+          <p class="text-xs font-semibold text-teak-600 uppercase tracking-wider">Bagus · ⭐⭐⭐⭐</p>
+          <p class="mt-2 font-bold text-rajang-900">11:00 AM – 2:00 PM</p>
+          <ul class="mt-3 text-sm text-rajang-700 space-y-1.5 list-disc pl-5">
+            <li>Food Court tingkat atas penuh operasi</li>
+            <li>Masa terbaik cuba Mi Kampua + Sup Bola</li>
+            <li>Belian Kek Lapis sebelum pilihan habis</li>
+            <li>Parkir jalan lebih mudah selepas 11 pagi</li>
+          </ul>
+        </article>
+
+        <article class="card p-6 border-t-4 border-chilli-500">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-chilli-100 text-chilli-700">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 21a8 8 0 0 0-16 0"/><circle cx="10" cy="8" r="5"/><path d="M22 16a5 5 0 0 0-5-5"/><path d="M17 22h4"/></svg>
+            </span>
+            <h3 class="font-display text-xl font-bold text-rajang-900">Tempoh Disyorkan</h3>
+          </div>
+          <p class="text-xs font-semibold text-teak-600 uppercase tracking-wider">Kesesuaian · ⭐⭐⭐⭐⭐</p>
+          <p class="mt-2 font-bold text-rajang-900">2 – 3 jam santai</p>
+          <ul class="mt-3 text-sm text-rajang-700 space-y-1.5 list-disc pl-5">
+            <li>1 jam: Melintas pantas & beli keperluan sahaja</li>
+            <li>2.5 jam: Pilih teliti + cuba makanan + beli Kek Lapis</li>
+            <li>Gabung Tua Pek Kong + Rejang Esplanade = setengah hari</li>
+            <li>Gabung Rumah Panjang Bawang Assan = sehari penuh</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="mt-10 card p-6 md:p-8 bg-gradient-to-br from-rajang-50 to-swan-50 border-rajang-200">
+        <div class="grid gap-6 md:grid-cols-2 items-start">
+          <div>
+            <p class="font-display text-lg md:text-xl font-bold text-rajang-900">
+              📅 Hari Paling Sesuai Lawat
+            </p>
+            <ul class="mt-3 text-sm text-rajang-800 space-y-2 leading-relaxed">
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 font-semibold text-rajang-700">Isnin – Jumaat:</span>
+                <span>Pilihan lengkap, kurang pelancong, ruang luas untuk memilih & tawar harga.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 font-semibold text-teak-700">Sabtu & Ahad:</span>
+                <span>Paling MERIAH! Ramai keluarga tempatan & pelancong. Cuba elak puncak 9–11 pagi.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 font-semibold text-chilli-700">Cuti Umum & Gawai (Jun):</span>
+                <span>Beberapa gerai etnik tutup tetapi ada gerai khas jual hasil perayaan.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 font-semibold text-rajang-800">Musim Durian (Nov–Jan):</span>
+                <span>Waktu TERBAIK jika peminat Raja Buah — gerai khas di depan pasar!</span>
+              </li>
+            </ul>
+          </div>
+          <div class="rounded-2xl bg-white/80 p-5 border border-rajang-100/60">
+            <p class="text-sm font-bold text-rajang-800 mb-2">🌤️ Iklim Sibu · Bumi Kenyalang</p>
+            <p class="text-sm text-rajang-700 leading-relaxed">
+              Suhu sepanjang tahun antara 23°C – 33°C dengan kelembapan
+              melebihi 80%. Musim hujan utama November – Februari (hujan
+              petang). Musim kemarau lebih jelas Mei – Ogos. Bawa payung mini
+              untuk lindungan matahari & hujan rencana. Sentiasa bawa botol
+              air minuman — berjalan 2 jam di pasar haba badan akan naik!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: PARKIR -->
+  <section id="parkir" class="scroll-mt-24 bg-teak-50/60">
+    <div class="container py-16 md:py-20">
+      <div class="max-w-3xl mb-10 md:mb-12">
+        <span class="section-eyebrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
+          Maklumat Parkir Kenderaan
+        </span>
+        <h2 class="section-title mt-3">Di Mana Hendak Letak Kereta / Motosikal?</h2>
+        <p class="mt-3 text-rajang-700 leading-prose">
+          Parkir di Jalan Channel adalah terhad dan cepat penuh pada waktu
+          pagi. Berikut adalah {PARKING.length} pilihan tempat parkir terbaik
+          berhampiran Pasar Sentral Sibu untuk rujukan anda.
+        </p>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-2">
+        {PARKING.map((p) => (
+          <article class="card p-5 md:p-6 flex flex-col gap-4">
+            <div class="flex items-start gap-4">
+              <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-teak-200 text-teak-700">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
+              </span>
+              <div class="min-w-0 flex-1">
+                <h3 class="font-display text-lg font-bold text-rajang-900 leading-snug">
+                  {p.name}
+                </h3>
+                <p class="text-sm text-rajang-600 mt-0.5">Jarak dari pasar: {p.distance}</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3 rounded-xl bg-swan-50 p-4 text-sm">
+              <div>
+                <p class="text-xs uppercase tracking-wider text-rajang-500 font-semibold">Kadar Bayaran</p>
+                <p class="mt-1 font-bold text-rajang-900">{p.rate}</p>
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-wider text-rajang-500 font-semibold">Kapasiti</p>
+                <p class="mt-1 font-bold text-rajang-900">{p.capacity}</p>
+              </div>
+            </div>
+            <p class="text-sm text-rajang-700 leading-relaxed">{p.notes}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: PENGANGKUTAN TERPERINCI -->
+  <section id="pengangkutan" class="scroll-mt-24">
+    <div class="container py-16 md:py-20">
+      <div class="max-w-3xl mb-10 md:mb-12">
+        <span class="section-eyebrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 17h14M5 17a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2M5 17l-1 3M19 17l1 3"/></svg>
+          Pengangkutan Terperinci
+        </span>
+        <h2 class="section-title mt-3">7 Cara Ke Pasar Sentral Sibu</h2>
+        <p class="mt-3 text-rajang-700 leading-prose">
+          Dari Lapangan Terbang Sibu (SBW), stesen bas, Terminal Bot Ekspres,
+          dan sekitar bandar. Panduan langkah demi langkah lengkap termasuk
+          anggaran kos dan petua tempatan yang sebenarnya.
+        </p>
+      </div>
+
+      <div class="space-y-5">
+        {TRANSPORT.map((t, idx) => (
+          <details
+            class={`card overflow-hidden transition ${idx === 0 ? 'open' : ''}`}
+            {...(idx === 0 ? { open: true } : {})}
+          >
+            <summary class="list-none cursor-pointer">
+              <div class="flex flex-wrap items-center gap-4 px-5 py-5 md:px-6 md:py-6 hover:bg-swan-50 transition pr-14 relative">
+                <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-rajang-100 text-rajang-700 text-lg">
+                  {modeLabels[t.mode]?.icon ?? '📍'}
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="chip">{modeLabels[t.mode]?.label ?? t.mode}</span>
+                    <span class="inline-flex items-center gap-1 text-xs font-semibold text-teak-700">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      {t.duration}
+                    </span>
+                  </div>
+                  <h3 class="mt-1.5 font-display text-lg md:text-xl font-bold text-rajang-900 leading-snug pr-4">
+                    {t.title}
+                  </h3>
+                  <p class="mt-1 text-sm text-rajang-600 font-semibold">Anggaran kos: {t.cost}</p>
+                </div>
+                <span class="absolute right-5 top-1/2 -translate-y-1/2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-rajang-50 text-rajang-600 group-open:rotate-180 transition open:rotate-180">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </span>
+              </div>
+            </summary>
+            <div class="px-5 pb-6 md:px-6 md:pb-7 md:pl-[5.25rem] pl-[4.25rem] grid lg:grid-cols-5 gap-6">
+              <div class="lg:col-span-3">
+                <p class="text-xs font-semibold uppercase tracking-wider text-rajang-500 mb-3">Langkah-langkah</p>
+                <ol class="space-y-3 text-sm text-rajang-800">
+                  {t.steps.map((step, i) => (
+                    <li class="flex gap-3">
+                      <span class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rajang-900 text-white text-xs font-bold">
+                        {i + 1}
+                      </span>
+                      <span class="leading-relaxed">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+              <div class="lg:col-span-2">
+                <p class="text-xs font-semibold uppercase tracking-wider text-teak-600 mb-2">💡 Petua Tempatan</p>
+                <div class="rounded-xl bg-teak-50 border border-teak-100 p-4 text-sm text-teak-900 leading-relaxed">
+                  {t.tips}
+                </div>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 9: MAKANAN BERDEKATAN -->
+  <section id="makanan" class="scroll-mt-24 pattern-rajang">
+    <div class="container py-16 md:py-20">
+      <div class="max-w-3xl mb-10 md:mb-12">
+        <span class="section-eyebrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+          Makanan Berdekatan · 6 Pilihan Terbaik
+        </span>
+        <h2 class="section-title mt-3">Di Mana Hendak Makan & Minum?</h2>
+        <p class="mt-3 text-rajang-700 leading-prose">
+          Dari food court tingkat atas pasar (RM5 Mi Kampua!), ke lorong
+          kedai kopi Fuzhou kaki bukit Tua Pek Kong, ke restoran mewah
+          masakan ulam hutan. {FOOD_SPOTS.length} pilihan dalam 700m dari
+          Pasar Sentral Sibu.
+        </p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {FOOD_SPOTS.map((m) => (
+          <article class="card p-5 md:p-6">
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <h3 class="font-display text-lg font-bold text-rajang-900 leading-snug">{m.name}</h3>
+              <span class={`shrink-0 inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${priceBadge[m.price]}`}>
+                {priceLabel[m.price]}
+              </span>
+            </div>
+            <p class="text-xs font-semibold text-rajang-500 uppercase tracking-wider">Jarak dari pasar</p>
+            <p class="text-sm font-semibold text-rajang-800">{m.distance}</p>
+            <ul class="mt-4 flex flex-wrap gap-1.5">
+              {m.specialty.map((sp) => (
+                <li class="chip">{sp}</li>
+              ))}
+            </ul>
+            <p class="mt-4 text-sm text-rajang-700 leading-relaxed">{m.note}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 10: TEMPAT MENARIK BERDEKATAN -->
+  <section id="tempat-menarik" class="scroll-mt-24">
+    <div class="container py-16 md:py-20">
+      <div class="max-w-3xl mb-10 md:mb-12">
+        <span class="section-eyebrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Tempat Menarik Berdekatan
+        </span>
+        <h2 class="section-title mt-3">Gabungkan Lawatan Anda</h2>
+        <p class="mt-3 text-rajang-700 leading-prose">
+          Pasar Sentral terletak di jantung Bandar Sibu. Manfaatkan lokasi
+          strategik untuk meneroka {NEARBY_ATTRACTIONS.length} tempat menarik
+          berhampiran — dari Kuil Tua Pek Kong di bukit, ke Pusat Warisan
+          Sibu, Rumah Panjang Iban di sungai Rejang, sehingga menara
+          membeli-belah Wisma Sanyan.
+        </p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {NEARBY_ATTRACTIONS.map((a) => (
+          <article class="card overflow-hidden flex flex-col">
+            <div class="px-5 pt-5 md:px-6 md:pt-6">
+              <div class="flex flex-wrap items-center gap-2 mb-3">
+                <span class="chip-accent">{a.category}</span>
+                <span class="inline-flex items-center gap-1 text-xs font-semibold text-rajang-600">
+                  📍 {a.distance}
+                </span>
+              </div>
+              <h3 class="font-display text-lg font-bold text-rajang-900 leading-snug">
+                {a.name}
+              </h3>
+            </div>
+            <div class="px-5 md:px-6 mt-3 text-sm text-rajang-700 leading-relaxed flex-1">
+              <p>{a.highlight}</p>
+            </div>
+            <div class="mx-5 mt-4 mb-5 md:mx-6 md:mb-6 flex items-center justify-between border-t border-rajang-100 pt-4">
+              <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-teak-700">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                {a.duration}
+              </span>
+              <a href="#peta" class="text-xs font-semibold text-rajang-700 hover:text-rajang-900 inline-flex items-center gap-1">
+                Lihat peta
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 11: PETA GOOGLE MAPS (Bahasa Melayu / Malaysia) -->
+  <section id="peta" class="scroll-mt-24 bg-rajang-950 text-white">
+    <div class="container py-16 md:py-20">
+      <div class="max-w-3xl mb-8 md:mb-10">
+        <span class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white/90">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6c0 .66-.08 1.29-.21 1.91L12 10.5l3.21-2.59A7.999 7.999 0 0 1 19 7v8.34a5.995 5.995 0 0 1-7 0V6Z"/><path d="M14 4.78V3l-5 3v1.78a8 8 0 0 0-5 3.57L3 9v8l1 1 5-2a6 6 0 0 0 10 0l5 2 1-1V9l-1-.65a8 8 0 0 0-5-3.57"/></svg>
+          Peta Lokasi Interaktif
+        </span>
+        <h2 class="mt-3 font-display text-2xl md:text-3xl font-bold text-white tracking-tight">
+          Cari Lokasi di Google Maps (BM)
+        </h2>
+        <p class="mt-3 text-white/75 leading-prose">
+          Navigasi terus dari lokasi semasa anda ke Pasar Sentral Sibu di
+          Jalan Channel, bertentangan Terminal Bot Ekspres Sibu, Sarawak.
+          Peta & antaramuka dalam Bahasa Melayu / Malaysia.
+        </p>
+      </div>
+
+      <div class="rounded-3xl overflow-hidden border border-white/10 shadow-card bg-white/5">
+        <iframe
+          title="Peta Pasar Sentral Sibu, Sarawak (Bahasa Melayu)"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.638812106611!2d111.82615271212879!3d2.287546297682762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31f77fdec23275ab%3A0x3b75d77a9d79c8da!2sPasar%20Sentral%20Sibu!5e0!3m2!1sms!2smy!5m2!1sms!2smy"
+          width="100%"
+          height="480"
+          style="border:0; display:block;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          class="min-h-[360px]"
+        ></iframe>
+      </div>
+
+      <div class="mt-6 flex flex-wrap items-center gap-3 text-sm text-white/80">
+        <span class="inline-flex items-start gap-2">
+          <span class="mt-0.5 text-white/60">📍</span>
+          <span class="max-w-xl">{SITE.address}</span>
+        </span>
+        <span class="inline-flex items-start gap-2">
+          <span class="mt-0.5 text-white/60">☎</span>
+          <span>+60 84-313 449 (Majlis Bandaraya Sibu)</span>
+        </span>
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Jalan+Channel%2C+Pekan+Sibu%2C+96000+Sibu%2C+Sarawak%2C+Malaysia"
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          class="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-xs font-bold text-rajang-900 hover:bg-swan-100 transition ml-auto"
+        >
+          Buka dalam Google Maps
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 12: FAQ -->
+  <FaqAccordion />
+
+</BaseLayout>

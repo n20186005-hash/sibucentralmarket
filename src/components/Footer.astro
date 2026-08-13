@@ -1,0 +1,63 @@
+---
+import { SITE } from '@/consts';
+---
+
+<footer class="border-t border-rajang-100/70 bg-rajang-950 text-rajang-100 pattern-rajang">
+  <div class="container py-12 md:py-16 grid gap-10 md:grid-cols-12 items-start">
+    <div class="md:col-span-5">
+      <div class="flex items-center gap-3 mb-4">
+        <img src="/favicon.svg" alt="" width="40" height="40" />
+        <span class="font-display text-xl font-bold text-white">{SITE.name}</span>
+      </div>
+      <p class="text-sm leading-relaxed text-rajang-200 max-w-md">
+        Panduan pelawat tidak rasmi untuk Pasar Sentral Sibu — pasar tertutup
+        terbesar di Malaysia, terletak di Jalan Channel bertentangan Terminal
+        Bot Ekspres Sibu. Meneroka hasil hutan Sarawak, warisan Fuzhou, dan
+        cita-cita mi kampua yang tersohor.
+      </p>
+      <div class="mt-5 text-xs text-rajang-400 space-y-1">
+        <p>📍 {SITE.address}</p>
+        <p>🌐 Bahasa Melayu · Lokasi: Sibu, Sarawak, Malaysia · Tel: +60 84-313 449</p>
+      </div>
+    </div>
+    <div class="md:col-span-4">
+      <h4 class="font-display text-base font-bold text-white mb-3">Pautan Pantas</h4>
+      <ul class="text-sm grid grid-cols-2 gap-2 text-rajang-200">
+        <li><a href="#bahagian" class="hover:text-white underline-offset-2 hover:underline">Bahagian Pasar</a></li>
+        <li><a href="#galeri" class="hover:text-white underline-offset-2 hover:underline">Galeri Gambar</a></li>
+        <li><a href="#pengangkutan" class="hover:text-white underline-offset-2 hover:underline">Cara Ke Sana</a></li>
+        <li><a href="#parkir" class="hover:text-white underline-offset-2 hover:underline">Maklumat Parkir</a></li>
+        <li><a href="#makanan" class="hover:text-white underline-offset-2 hover:underline">Makanan Berdekatan</a></li>
+        <li><a href="#tempat-menarik" class="hover:text-white underline-offset-2 hover:underline">Tempat Menarik</a></li>
+        <li><a href="#peta" class="hover:text-white underline-offset-2 hover:underline">Peta Lokasi</a></li>
+        <li><a href="#faq" class="hover:text-white underline-offset-2 hover:underline">Soalan Lazim</a></li>
+      </ul>
+    </div>
+    <div class="md:col-span-3">
+      <h4 class="font-display text-base font-bold text-white mb-3">Pengiktirafan</h4>
+      <div class="rounded-2xl border border-rajang-800 bg-rajang-900/60 p-4 text-xs leading-relaxed text-rajang-300 space-y-2">
+        <p class="font-semibold text-rajang-100">Penafian Tidak Rasmi</p>
+        <p>
+          Laman web ini adalah inisiatif panduan pelawat bebas dan TIDAK
+          dikendalikan, dikeluarkan, atau diwakili oleh pihak pengurusan
+          Pasar Sentral Sibu, Majlis Bandaraya Sibu (MBS), Tourism Sarawak,
+          atau mana-mana agensi kerajaan Persekutuan atau Negeri Sarawak.
+        </p>
+        <p>
+          Rujuk pihak pengurusan pasar di talian +60 84-313 449 atau laman
+          web rasmi Sarawak Tourism Board untuk pengesahan maklumat terkini
+          sebelum merancang perjalanan anda ke Sibu, Bumi Kenyalang.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-rajang-800/70">
+    <div class="container py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-rajang-400">
+      <p>© {new Date().getFullYear()} {SITE.name}. Panduan pelawat tidak rasmi · Swan Town, Sarawak.</p>
+      <a href="#atas" class="inline-flex items-center gap-1.5 hover:text-rajang-100 transition">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+        Kembali ke atas
+      </a>
+    </div>
+  </div>
+</footer>

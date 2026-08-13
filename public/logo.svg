@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 160" width="480" height="160">
+  <defs>
+    <linearGradient id="riverGrad" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#37888b"/>
+      <stop offset="1" stop-color="#27595d"/>
+    </linearGradient>
+    <linearGradient id="swanGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fbf8ef"/>
+      <stop offset="1" stop-color="#ead8a5"/>
+    </linearGradient>
+    <linearGradient id="canopyGrad" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#e2533b"/>
+      <stop offset="1" stop-color="#ad2d20"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(12, 24)">
+    <g>
+      <path d="M84 84 C 72 84, 64 78, 62 68 C 60 58, 66 52, 74 50 L 60 30 C 58 26, 60 22, 64 22 L 68 22 L 68 14 C 68 10, 72 8, 76 10 C 80 12, 82 16, 80 20 C 84 18, 88 22, 86 28 C 84 34, 82 38, 84 46 C 86 52, 92 56, 92 64 C 92 76, 90 84, 84 84 Z"
+        fill="url(#swanGrad)" stroke="#cb8632" stroke-width="1.2"/>
+      <circle cx="65.5" cy="26.5" r="1.6" fill="#213d40"/>
+      <path d="M62 29 L 54 32 L 60 33 Z" fill="#e2533b"/>
+    </g>
+
+    <g transform="translate(0, 72)">
+      <path d="M4 28 Q 24 16, 44 28 T 84 28 L 84 36 Q 64 24, 44 36 T 4 36 Z"
+        fill="url(#riverGrad)" opacity="0.85"/>
+      <path d="M8 44 Q 28 34, 48 44 T 88 44" fill="none"
+        stroke="#82c5c5" stroke-width="1.2" opacity="0.7"/>
+    </g>
+
+    <g transform="translate(100, 56)">
+      <path d="M0 28 L 20 8 L 60 8 L 80 28 Z" fill="url(#canopyGrad)"/>
+      <path d="M0 28 L 80 28" stroke="#8e4625" stroke-width="1.6"/>
+      <rect x="10" y="28" width="4" height="22" fill="#733924"/>
+      <rect x="38" y="28" width="4" height="22" fill="#733924"/>
+      <rect x="66" y="28" width="4" height="22" fill="#733924"/>
+      <path d="M0 28 L 80 28 L 80 28 L 0 28 Z" fill="none"/>
+      <path d="M2 28 Q 10 24, 18 28 Q 26 32, 34 28 Q 42 24, 50 28 Q 58 32, 66 28 Q 74 24, 78 28"
+        fill="none" stroke="#fbf8ef" stroke-width="1.2" opacity="0.85"/>
+    </g>
+  </g>
+
+  <g font-family="'Playfair Display', Georgia, 'Times New Roman', serif">
+    <text x="188" y="74" font-size="34" font-weight="700" fill="#213d40" letter-spacing="0.4">
+      Pasar Sentral
+    </text>
+    <text x="188" y="112" font-size="30" font-weight="700" fill="#2c6d71" letter-spacing="1.2">
+      SIBU
+    </text>
+    <text x="188" y="136" font-family="Inter, 'Segoe UI', Arial, sans-serif"
+      font-size="11.5" font-weight="500" fill="#733924" letter-spacing="2.4" text-transform="uppercase">
+      Pasar Tertutup Terbesar di Malaysia
+    </text>
+  </g>
+</svg>

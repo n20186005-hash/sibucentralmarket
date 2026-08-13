@@ -1,0 +1,126 @@
+---
+import '@/styles/global.css';
+import BaseHead from '@/components/BaseHead.astro';
+import GA4 from '@/components/GA4.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { SITE } from '@/consts';
+
+const {
+  title = SITE.title,
+  description = SITE.description,
+  image = '/gallery/sibu-central-market-01.jpg',
+} = Astro.props;
+
+const site = Astro.site;
+const baseUrl = site ? site.toString() : undefined;
+
+const touristAttractionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TouristAttraction',
+  name: SITE.name,
+  alternateName: ['Sibu Central Market', 'Pasar Tani Sibu', '诗巫中央市场'],
+  description: SITE.description,
+  url: baseUrl,
+  image: site ? new URL('/gallery/sibu-central-market-01.jpg', site).toString() : '/gallery/sibu-central-market-01.jpg',
+  inLanguage: SITE.language,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Jalan Channel, Pekan Sibu',
+    addressLocality: 'Sibu',
+    addressRegion: 'Sarawak',
+    postalCode: '96000',
+    addressCountry: 'MY',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: SITE.coordinates.lat,
+    longitude: SITE.coordinates.lng,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+      opens: '06:00',
+      closes: '18:00',
+    },
+  ],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: String(SITE.ratingValue),
+    reviewCount: String(SITE.reviewCount),
+    bestRating: '5',
+    worstRating: '1',
+  },
+  priceRange: SITE.priceRange,
+  fee: 'No entrance fee',
+  touristType: ['Cultural tourist', 'Food traveller', 'Shopper', 'Family visitor', 'Ethnic heritage tourist'],
+  availableLanguage: ['ms', 'en', 'zh', 'bjn'],
+  additionalType: ['IndoorMarket', 'FarmersMarket', 'FoodCourt'],
+};
+
+const localBusinessLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': baseUrl ? `${baseUrl}#localbusiness` : undefined,
+  name: SITE.name,
+  description: SITE.description,
+  url: baseUrl,
+  image: site ? new URL('/gallery/sibu-central-market-01.jpg', site).toString() : '/gallery/sibu-central-market-01.jpg',
+  telephone: '+6084313449',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Jalan Channel, Pekan Sibu',
+    addressLocality: 'Sibu',
+    addressRegion: 'Sarawak',
+    postalCode: '96000',
+    addressCountry: 'MY',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: SITE.coordinates.lat,
+    longitude: SITE.coordinates.lng,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+      opens: '06:00',
+      closes: '18:00',
+    },
+  ],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: String(SITE.ratingValue),
+    reviewCount: String(SITE.reviewCount),
+  },
+  priceRange: SITE.priceRange,
+  acceptsReservations: 'No',
+  servesCuisine: ['Malaysian', 'Sarawakian', 'Chinese Fuzhou', 'Iban/Dayak'],
+};
+---
+
+<!doctype html>
+<html lang={SITE.language}>
+  <head>
+    <BaseHead title={title} description={description} image={image} />
+    <GA4 />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(touristAttractionLd)}
+    ></script>
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(localBusinessLd)}
+    ></script>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
