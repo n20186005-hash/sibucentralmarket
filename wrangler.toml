@@ -1,0 +1,10 @@
+name = "burnhamparkbaguio"
+compatibility_date = "2026-08-09"
+
+# 注意：Astro 7 + Cloudflare 适配器的静态产物路径需指向 dist/client
+assets = { directory = "./dist/client" }
+
+# 如果后续开启了 Cloudflare KV，再取消下方注释并填入 ID
+# [[kv_namespaces]]
+# binding = "SESSION"
+# id = "你的_KV_NAMESPACE_ID"
