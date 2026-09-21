@@ -13,6 +13,15 @@ if (SITE_URL) {
     sitemap({
       changefreq: 'monthly',
       priority: 0.7,
+      // 三语站点：在 sitemap-index 中为每种语言输出 xhtml:link 互指
+      i18n: {
+        defaultLocale: 'ms',
+        locales: {
+          ms: 'ms-MY',
+          en: 'en-US',
+          zh: 'zh-Hans',
+        },
+      },
     })
   );
 }
@@ -20,6 +29,13 @@ if (SITE_URL) {
 export default defineConfig({
   site: SITE_URL || undefined,
   output: 'static',
+  i18n: {
+    defaultLocale: 'ms',
+    locales: ['ms', 'en', 'zh'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   adapter: cloudflare({
     imageService: 'passthrough',
   }),

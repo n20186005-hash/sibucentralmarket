@@ -6,6 +6,12 @@ dist/
 # dependencies
 node_modules/
 
+# local pnpm store (used during install)
+.pnpm-store/
+
+# install logs
+.il.log
+
 # logs
 npm-debug.log*
 yarn-debug.log*

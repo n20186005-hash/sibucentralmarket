@@ -1,0 +1,640 @@
+---
+import { GALLERY, SITE, mapsEmbedUrl } from '@/consts';
+import { LOCALE_META, type Locale } from '@/i18n/config';
+import { CONTENT } from '@/i18n/content';
+import { UI } from '@/i18n/ui';
+
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+
+const ui = UI[locale];
+const c = CONTENT[locale];
+const meta = LOCALE_META[locale];
+const name = SITE.nameByLocale[locale];
+
+const priceBadge: Record<string, string> = {
+  low: 'bg-rajang-100 text-rajang-700',
+  mid: 'bg-swan-200 text-teak-700',
+  high: 'bg-chilli-100 text-chilli-700',
+};
+const floorBadge: Record<string, string> = {
+  bawah: 'bg-rajang-50 text-rajang-700 border-rajang-200',
+  atas: 'bg-teak-50 text-teak-700 border-teak-200',
+};
+const ratingCount = SITE.reviewCount.toLocaleString(meta.numberLocale);
+const galleryCount = GALLERY.length;
+---
+
+<!-- SECTION 1: HERO -->
+<section id="hero" class="relative overflow-hidden">
+  <div class="relative h-[72vh] min-h-[520px] w-full">
+    <img
+      src={SITE.hero}
+      alt={name}
+      class="absolute inset-0 h-full w-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+      width="1600"
+      height="900"
+    />
+    <div class="absolute inset-0 hero-overlay"></div>
+  </div>
+  <div class="container relative -mt-16 md:-mt-20 pb-6 md:pb-10">
+    <div class="max-w-3xl text-rajang-950">
+      <span class="inline-flex items-center gap-2 rounded-full bg-white/85 backdrop-blur border border-rajang-200/60 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-rajang-800 shadow-soft">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        {ui.hero.badge}
+      </span>
+      <h1 class="mt-5 font-display text-4xl md:text-6xl font-bold tracking-tight leading-[1.1] text-black">
+        {name}
+      </h1>
+      <p class="mt-2 font-display text-xl md:text-2xl font-semibold tracking-wide text-rajang-900">
+        {ui.hero.subtitle}
+      </p>
+      <p class="mt-5 text-lg md:text-xl leading-relaxed text-rajang-900 max-w-2xl">
+        {ui.meta.description}
+      </p>
+      <div class="mt-7 flex flex-wrap items-center gap-3">
+        <a href="#bahagian" class="btn-primary !bg-rajang-900 hover:!bg-rajang-950 focus:!ring-rajang-400">
+          {ui.hero.ctaPrimary}
+        </a>
+        <a href="#pengangkutan" class="btn-secondary !bg-white !text-rajang-900 !border-rajang-300 hover:!bg-swan-50">
+          {ui.hero.ctaSecondary}
+        </a>
+      </div>
+      <div class="mt-7 flex flex-wrap items-center gap-4 text-sm text-rajang-900">
+        <span class="inline-flex items-center gap-2">
+          <span class="inline-flex gap-0.5 text-amber-500">★★★★★</span>
+          <span class="font-bold text-black">{SITE.ratingValue.toFixed(1)}</span>
+          <span class="text-rajang-800">· {ratingCount} {ui.hero.ratingSuffix}</span>
+        </span>
+        <span class="h-4 w-px bg-rajang-300/80"></span>
+        <span class="inline-flex items-center gap-1.5 font-semibold text-rajang-900">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          {ui.hero.openHours}
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: INFO PENTING -->
+<section id="info-penting" class="scroll-mt-24">
+  <div class="container py-10 md:py-14">
+    <h2 class="sr-only">{ui.nav[0].label}</h2>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {c.keyInfo.map((k) => (
+        <div class="card p-5 md:p-6">
+          <div class="flex items-start gap-4">
+            <div class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-rajang-100 text-rajang-700">
+              {k.icon === 'ticket' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>
+              )}
+              {k.icon === 'clock' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              )}
+              {k.icon === 'stopwatch' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M9 2h6"/></svg>
+              )}
+              {k.icon === 'sun' && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+              )}
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="text-xs font-semibold uppercase tracking-wider text-rajang-500">{k.label}</p>
+              <p class="mt-1 font-display text-lg md:text-xl font-bold text-rajang-900 break-words">{k.value}</p>
+              <p class="mt-1 text-sm text-rajang-600">{k.sub}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: BAHAGIAN PASAR -->
+<section id="bahagian" class="scroll-mt-24 pattern-rajang">
+  <div class="container py-16 md:py-20">
+    <div class="max-w-3xl mb-10 md:mb-12">
+      <span class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>
+        {ui.sections.bahagian.eyebrow}
+      </span>
+      <h2 class="section-title mt-3">{ui.sections.bahagian.title}</h2>
+      <p class="mt-3 text-rajang-700 leading-prose">{ui.sections.bahagian.desc}</p>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {c.marketSections.map((p, i) => (
+        <article class="card p-6 hover:shadow-lg transition">
+          <div class="flex items-center justify-between mb-4">
+            <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-teak-100 text-teak-700 font-bold font-display">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span class={`chip-accent border ${floorBadge[p.floor]}`}>{ui.floorLabel[p.floor]}</span>
+          </div>
+          <h3 class="font-display text-xl font-bold text-rajang-900 leading-snug">{p.title}</h3>
+          <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-chilli-600">{p.tagline}</p>
+          <p class="mt-2 text-sm text-rajang-700 leading-relaxed">{p.description}</p>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {p.items.map((it) => <li class="chip">{it}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: GALERI -->
+<section id="galeri" class="scroll-mt-24">
+  <div class="container py-16 md:py-20">
+    <div class="max-w-3xl mb-10 md:mb-12">
+      <span class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+        {ui.sections.galeri.eyebrow}
+      </span>
+      <h2 class="section-title mt-3">{ui.sections.galeri.title}</h2>
+      <p class="mt-3 text-rajang-700 leading-prose">{ui.sections.galeri.desc}</p>
+    </div>
+
+    <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4" data-count={galleryCount}>
+      {GALLERY.map((src, i) => (
+        <button
+          type="button"
+          class={`gallery-item group relative overflow-hidden rounded-xl bg-rajang-100 text-left ${
+            i === 0 || i === 8 ? 'md:col-span-2 md:row-span-2 aspect-square' : 'aspect-[4/5]'
+          }`}
+          data-index={i}
+          data-src={src}
+          aria-label={`${ui.labels.bukaGambar} ${i + 1} — ${name}`}
+        >
+          <img
+            src={src}
+            alt={`${name} — ${ui.labels.foto}${String(i + 1).padStart(2, '0')}`}
+            loading={i < 4 ? 'eager' : 'lazy'}
+            decoding="async"
+            class="h-full w-full object-cover group-hover:scale-105 transition duration-500"
+            width="800"
+            height="800"
+          />
+          <span class="pointer-events-none absolute bottom-0 left-0 right-0 bg-gradient-to-t from-rajang-950/75 via-rajang-950/20 to-transparent p-3 text-xs font-medium text-white/95 opacity-0 group-hover:opacity-100 transition flex items-center justify-between">
+            <span>{ui.labels.foto}{String(i + 1).padStart(2, '0')}</span>
+            <span class="inline-flex items-center gap-1">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+            </span>
+          </span>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label={ui.labels.tutupGambar} data-open="false">
+  <button type="button" class="lightbox-close" aria-label={ui.labels.tutupGambar} data-action="close">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+  </button>
+  <button type="button" class="lightbox-nav lightbox-prev" aria-label={ui.labels.gambarSebelum} data-action="prev">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
+  <button type="button" class="lightbox-nav lightbox-next" aria-label={ui.labels.gambarSeterusnya} data-action="next">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
+  <img id="lightbox-img" src="" alt="" loading="lazy" decoding="async" />
+</div>
+
+<script is:inline define:vars={{ galleryImgs: GALLERY, altPrefix: name }}>
+(function () {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const grid = document.getElementById('gallery-grid');
+  const imgs = galleryImgs;
+  let currentIdx = 0;
+
+  function open(i) {
+    currentIdx = (i + imgs.length) % imgs.length;
+    lightboxImg.src = imgs[currentIdx];
+    lightboxImg.alt = altPrefix + ' — ' + (currentIdx + 1);
+    lightbox.setAttribute('data-open', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    lightbox.setAttribute('data-open', 'false');
+    document.body.style.overflow = '';
+  }
+  function next() { open(currentIdx + 1); }
+  function prev() { open(currentIdx - 1); }
+
+  if (grid) {
+    grid.addEventListener('click', function (e) {
+      const btn = e.target.closest('.gallery-item');
+      if (!btn) return;
+      open(parseInt(btn.getAttribute('data-index') || '0', 10));
+    });
+  }
+
+  lightbox.addEventListener('click', function (e) {
+    const t = e.target;
+    if (t === lightbox || (t.getAttribute && t.getAttribute('data-action') === 'close')) close();
+    else if (t.closest && t.closest('[data-action="close"]')) close();
+    else if (t.closest && t.closest('[data-action="next"]')) next();
+    else if (t.closest && t.closest('[data-action="prev"]')) prev();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (lightbox.getAttribute('data-open') !== 'true') return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowRight') next();
+    else if (e.key === 'ArrowLeft') prev();
+  });
+})();
+</script>
+
+<!-- SECTION 5: TIKET & YURAN -->
+<section id="tiket" class="scroll-mt-24 bg-rajang-50/60">
+  <div class="container py-16 md:py-20">
+    <div class="grid gap-10 lg:grid-cols-12 items-start">
+      <div class="lg:col-span-5">
+        <span class="section-eyebrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg>
+          {ui.sections.tiket.eyebrow}
+        </span>
+        <h2 class="section-title mt-3">{ui.sections.tiket.title}</h2>
+        <p class="mt-4 text-rajang-700 leading-prose">{ui.sections.tiket.desc}</p>
+        <div class="mt-6 card p-5 border-swan-200 bg-swan-50/60">
+          <p class="text-sm font-semibold text-swan-800 mb-2">{ui.sections.tiket.tipsTitle}</p>
+          <ul class="text-sm text-rajang-800 space-y-1.5 leading-relaxed list-disc pl-5">
+            {ui.sections.tiket.tips.map((t) => <li>{t}</li>)}
+          </ul>
+        </div>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-rajang-100 text-sm">
+              <thead class="bg-rajang-900 text-white">
+                <tr>
+                  <th scope="col" class="text-left px-5 py-4 font-semibold tracking-wide">{ui.labels.tableKategori}</th>
+                  <th scope="col" class="text-left px-5 py-4 font-semibold tracking-wide">{ui.labels.tableYuran}</th>
+                  <th scope="col" class="text-left px-5 py-4 font-semibold tracking-wide">{ui.labels.tableNota}</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-rajang-100 bg-white">
+                {c.ticketInfo.map((t) => (
+                  <tr class="hover:bg-swan-50">
+                    <td class="px-5 py-4 font-semibold text-rajang-900">{t.type}</td>
+                    <td class="px-5 py-4">
+                      {t.free ? (
+                        <span class="inline-flex items-center gap-2 rounded-full bg-rajang-100 px-3 py-1 text-xs font-bold text-rajang-700">{t.price}</span>
+                      ) : (
+                        <span class="inline-flex items-center gap-2 rounded-full bg-chilli-50 px-3 py-1 text-xs font-bold text-chilli-700">{t.price}</span>
+                      )}
+                    </td>
+                    <td class="px-5 py-4 text-rajang-700">{t.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: MASA TERBAIK -->
+<section id="masa-terbaik" class="scroll-mt-24">
+  <div class="container py-16 md:py-20">
+    <div class="max-w-3xl mb-10 md:mb-12">
+      <span class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        {ui.sections.masa.eyebrow}
+      </span>
+      <h2 class="section-title mt-3">{ui.sections.masa.title}</h2>
+      <p class="mt-3 text-rajang-700 leading-prose">{ui.sections.masa.desc}</p>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-3">
+      {ui.sections.masa.cards.map((card, idx) => (
+        <article class={`card p-6 border-t-4 ${idx === 0 ? 'border-t-rajang-500' : idx === 1 ? 'border-t-teak-500' : 'border-t-chilli-500'}`}>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-rajang-100 text-rajang-700">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </span>
+            <h3 class="font-display text-xl font-bold text-rajang-900">{card.title}</h3>
+          </div>
+          <p class="text-xs font-semibold text-teak-600 uppercase tracking-wider">{card.level}</p>
+          <p class="mt-2 font-bold text-rajang-900">{card.time}</p>
+          <ul class="mt-3 text-sm text-rajang-700 space-y-1.5 list-disc pl-5">
+            {card.bullets.map((b) => <li>{b}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-10 card p-6 md:p-8 bg-gradient-to-br from-rajang-50 to-swan-50 border-rajang-200">
+      <div class="grid gap-6 md:grid-cols-2 items-start">
+        <div>
+          <p class="font-display text-lg md:text-xl font-bold text-rajang-900">{ui.sections.masa.dayTitle}</p>
+          <ul class="mt-3 text-sm text-rajang-800 space-y-2 leading-relaxed">
+            {ui.sections.masa.days.map((d) => (
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 font-semibold text-rajang-700">{d.label}</span>
+                <span>{d.text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-2xl bg-white/80 p-5 border border-rajang-100/60">
+          <p class="text-sm font-bold text-rajang-800 mb-2">{ui.sections.masa.climateTitle}</p>
+          <p class="text-sm text-rajang-700 leading-relaxed">{ui.sections.masa.climate}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: PARKIR -->
+<section id="parkir" class="scroll-mt-24 bg-teak-50/60">
+  <div class="container py-16 md:py-20">
+    <div class="max-w-3xl mb-10 md:mb-12">
+      <span class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
+        {ui.sections.parkir.eyebrow}
+      </span>
+      <h2 class="section-title mt-3">{ui.sections.parkir.title}</h2>
+      <p class="mt-3 text-rajang-700 leading-prose">{ui.sections.parkir.desc}</p>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      {c.parking.map((p) => (
+        <article class="card p-5 md:p-6 flex flex-col gap-4">
+          <div class="flex items-start gap-4">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-teak-200 text-teak-700">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
+            </span>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-display text-lg font-bold text-rajang-900 leading-snug">{p.name}</h3>
+              <p class="text-sm text-rajang-600 mt-0.5">{ui.labels.jarak}: {p.distance}</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3 rounded-xl bg-swan-50 p-4 text-sm">
+            <div>
+              <p class="text-xs uppercase tracking-wider text-rajang-500 font-semibold">{ui.labels.kadar}</p>
+              <p class="mt-1 font-bold text-rajang-900">{p.rate}</p>
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-wider text-rajang-500 font-semibold">{ui.labels.kapasiti}</p>
+              <p class="mt-1 font-bold text-rajang-900">{p.capacity}</p>
+            </div>
+          </div>
+          <p class="text-sm text-rajang-700 leading-relaxed">{p.notes}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: PENGANGKUTAN -->
+<section id="pengangkutan" class="scroll-mt-24">
+  <div class="container py-16 md:py-20">
+    <div class="max-w-3xl mb-10 md:mb-12">
+      <span class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 17h14M5 17a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2M5 17l-1 3M19 17l1 3"/></svg>
+        {ui.sections.pengangkutan.eyebrow}
+      </span>
+      <h2 class="section-title mt-3">{ui.sections.pengangkutan.title}</h2>
+      <p class="mt-3 text-rajang-700 leading-prose">{ui.sections.pengangkutan.desc}</p>
+    </div>
+
+    <div class="space-y-5">
+      {c.transport.map((t, idx) => (
+        <details class={`card overflow-hidden transition ${idx === 0 ? 'open' : ''}`} {...(idx === 0 ? { open: true } : {})}>
+          <summary class="list-none cursor-pointer">
+            <div class="flex flex-wrap items-center gap-4 px-5 py-5 md:px-6 md:py-6 hover:bg-swan-50 transition pr-14 relative">
+              <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-rajang-100 text-rajang-700 text-lg">
+                {ui.modeLabel[t.mode]?.icon ?? '📍'}
+              </span>
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="chip">{ui.modeLabel[t.mode]?.label ?? t.mode}</span>
+                  <span class="inline-flex items-center gap-1 text-xs font-semibold text-teak-700">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    {t.duration}
+                  </span>
+                </div>
+                <h3 class="mt-1.5 font-display text-lg md:text-xl font-bold text-rajang-900 leading-snug pr-4">{t.title}</h3>
+                <p class="mt-1 text-sm text-rajang-600 font-semibold">{ui.labels.anggaranKos}: {t.cost}</p>
+              </div>
+              <span class="absolute right-5 top-1/2 -translate-y-1/2 inline-flex h-9 w-9 items-center justify-center rounded-full bg-rajang-50 text-rajang-600 group-open:rotate-180 transition open:rotate-180">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+            </div>
+          </summary>
+          <div class="px-5 pb-6 md:px-6 md:pb-7 md:pl-[5.25rem] pl-[4.25rem] grid lg:grid-cols-5 gap-6">
+            <div class="lg:col-span-3">
+              <p class="text-xs font-semibold uppercase tracking-wider text-rajang-500 mb-3">{ui.labels.langkah}</p>
+              <ol class="space-y-3 text-sm text-rajang-800">
+                {t.steps.map((step, i) => (
+                  <li class="flex gap-3">
+                    <span class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rajang-900 text-white text-xs font-bold">{i + 1}</span>
+                    <span class="leading-relaxed">{step}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div class="lg:col-span-2">
+              <p class="text-xs font-semibold uppercase tracking-wider text-teak-600 mb-2">{ui.labels.petua}</p>
+              <div class="rounded-xl bg-teak-50 border border-teak-100 p-4 text-sm text-teak-900 leading-relaxed">{t.tips}</div>
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: MAKANAN BERDEKATAN -->
+<section id="makanan" class="scroll-mt-24 pattern-rajang">
+  <div class="container py-16 md:py-20">
+    <div class="max-w-3xl mb-10 md:mb-12">
+      <span class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+        {ui.sections.makanan.eyebrow}
+      </span>
+      <h2 class="section-title mt-3">{ui.sections.makanan.title}</h2>
+      <p class="mt-3 text-rajang-700 leading-prose">{ui.sections.makanan.desc}</p>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {c.foodSpots.map((m) => (
+        <article class="card p-5 md:p-6">
+          <div class="flex items-start justify-between gap-3 mb-3">
+            <h3 class="font-display text-lg font-bold text-rajang-900 leading-snug">{m.name}</h3>
+            <span class={`shrink-0 inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${priceBadge[m.price]}`}>
+              {ui.priceLabel[m.price]}
+            </span>
+          </div>
+          <p class="text-xs font-semibold text-rajang-500 uppercase tracking-wider">{ui.labels.jarak}</p>
+          <p class="text-sm font-semibold text-rajang-800">{m.distance}</p>
+          <ul class="mt-4 flex flex-wrap gap-1.5">
+            {m.specialty.map((sp) => <li class="chip">{sp}</li>)}
+          </ul>
+          <p class="mt-4 text-sm text-rajang-700 leading-relaxed">{m.note}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: TEMPAT MENARIK BERDEKATAN -->
+<section id="tempat-menarik" class="scroll-mt-24">
+  <div class="container py-16 md:py-20">
+    <div class="max-w-3xl mb-10 md:mb-12">
+      <span class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        {ui.sections.tempatMenarik.eyebrow}
+      </span>
+      <h2 class="section-title mt-3">{ui.sections.tempatMenarik.title}</h2>
+      <p class="mt-3 text-rajang-700 leading-prose">{ui.sections.tempatMenarik.desc}</p>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {c.nearby.map((a) => (
+        <article class="card overflow-hidden flex flex-col">
+          <div class="px-5 pt-5 md:px-6 md:pt-6">
+            <div class="flex flex-wrap items-center gap-2 mb-3">
+              <span class="chip-accent">{a.category}</span>
+              <span class="inline-flex items-center gap-1 text-xs font-semibold text-rajang-600">📍 {a.distance}</span>
+            </div>
+            <h3 class="font-display text-lg font-bold text-rajang-900 leading-snug">{a.name}</h3>
+          </div>
+          <div class="px-5 md:px-6 mt-3 text-sm text-rajang-700 leading-relaxed flex-1">
+            <p>{a.highlight}</p>
+          </div>
+          <div class="mx-5 mt-4 mb-5 md:mx-6 md:mb-6 flex items-center justify-between border-t border-rajang-100 pt-4">
+            <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-teak-700">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              {a.duration}
+            </span>
+            <a href="#peta" class="text-xs font-semibold text-rajang-700 hover:text-rajang-900 inline-flex items-center gap-1">
+              {ui.labels.lihatPeta}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 11: PETA GOOGLE MAPS -->
+<section id="peta" class="scroll-mt-24 bg-rajang-950 text-white">
+  <div class="container py-16 md:py-20">
+    <div class="max-w-3xl mb-8 md:mb-10">
+      <span class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white/90">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6c0 .66-.08 1.29-.21 1.91L12 10.5l3.21-2.59A7.999 7.999 0 0 1 19 7v8.34a5.995 5.995 0 0 1-7 0V6Z"/><path d="M14 4.78V3l-5 3v1.78a8 8 0 0 0-5 3.57L3 9v8l1 1 5-2a6 6 0 0 0 10 0l5 2 1-1V9l-1-.65a8 8 0 0 0-5-3.57"/></svg>
+        {ui.sections.peta.eyebrow}
+      </span>
+      <h2 class="mt-3 font-display text-2xl md:text-3xl font-bold text-white tracking-tight">
+        {ui.sections.peta.title}
+      </h2>
+      <p class="mt-3 text-white/75 leading-prose">{ui.sections.peta.desc}</p>
+    </div>
+
+    <div class="rounded-3xl overflow-hidden border border-white/10 shadow-card bg-white/5">
+      <iframe
+        title={ui.sections.peta.mapsTitle}
+        src={mapsEmbedUrl(meta.mapsLang)}
+        width="100%"
+        height="480"
+        style="border:0; display:block;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        class="min-h-[360px]"
+      ></iframe>
+    </div>
+
+    <div class="mt-6 flex flex-wrap items-center gap-3 text-sm text-white/80">
+      <span class="inline-flex items-start gap-2">
+        <span class="mt-0.5 text-white/60">📍</span>
+        <span class="max-w-xl">{SITE.address}</span>
+      </span>
+      <span class="inline-flex items-start gap-2">
+        <span class="mt-0.5 text-white/60">☎</span>
+        <span>{SITE.telephone}</span>
+      </span>
+      <a
+        href={SITE.mapsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-xs font-bold text-rajang-900 hover:bg-swan-100 transition ml-auto"
+      >
+        {ui.labels.bukaMaps}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 12: SUMBER RASMI -->
+<section id="sumber" class="scroll-mt-24 bg-swan-50">
+  <div class="container py-12 md:py-16">
+    <div class="max-w-3xl mb-8">
+      <span class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+        {ui.sections.sumber.eyebrow}
+      </span>
+      <h2 class="section-title mt-3">{ui.sections.sumber.title}</h2>
+      <p class="mt-3 text-rajang-700 leading-prose">{ui.sections.sumber.desc}</p>
+    </div>
+    <ul class="grid gap-3 md:grid-cols-3">
+      {ui.sections.sumber.links.map((s) => (
+        <li>
+          <a
+            href={s.url}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            class="card block p-5 h-full hover:shadow-lg transition"
+          >
+            <p class="font-display text-base font-bold text-rajang-900">{s.name}</p>
+            <p class="mt-1 text-sm text-rajang-600">{s.note}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<!-- SECTION 13: FAQ -->
+<section id="faq" class="scroll-mt-24">
+  <div class="container py-16 md:py-20">
+    <div class="max-w-3xl mb-10 md:mb-12">
+      <span class="section-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+        {ui.sections.faq.eyebrow}
+      </span>
+      <h2 class="section-title mt-3">{ui.sections.faq.title}</h2>
+      <p class="mt-3 text-rajang-700 leading-prose">{ui.sections.faq.desc}</p>
+    </div>
+
+    <div class="grid gap-3">
+      {c.faqs.map((f, i) => (
+        <details class={`group card p-0 overflow-hidden transition ${i === 0 ? 'open' : ''}`} {...(i === 0 ? { open: true } : {})}>
+          <summary class="flex cursor-pointer list-none items-start gap-4 px-5 py-4 md:px-6 md:py-5 hover:bg-swan-50 transition pr-14 relative">
+            <span class="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-rajang-100 text-rajang-700 text-xs font-bold">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span class="font-semibold text-rajang-900 leading-snug">{f.q}</span>
+            <span class="absolute right-5 top-1/2 -translate-y-1/2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-rajang-50 text-rajang-600 group-open:rotate-180 transition">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="px-5 pb-5 md:px-6 md:pb-6 pl-[4.25rem] md:pl-[4.75rem] text-sm text-rajang-700 leading-relaxed">
+            {f.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,23 +1,28 @@
 ---
 import { SITE } from '@/consts';
+import { absoluteUrl, LOCALES, LOCALE_META, type Locale } from '@/i18n/config';
+import { UI } from '@/i18n/ui';
+
+type Props = {
+  locale: Locale;
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+};
 
 const {
-  title = SITE.title,
-  description = SITE.description,
-  image = '/gallery/sibu-central-market-01.jpg',
+  locale,
+  title = UI[locale].meta.title,
+  description = UI[locale].meta.description,
+  image = SITE.ogImage,
   canonical = Astro.url.pathname,
 } = Astro.props;
 
-const site = Astro.site;
-const canonicalUrl = site
-  ? new URL(canonical, site).toString()
-  : canonical;
-const ogImage = site
-  ? new URL(image, site).toString()
-  : image;
-const ogType = 'website';
-const locale = SITE.locale;
-const language = SITE.language;
+const meta = LOCALE_META[locale];
+const canonicalUrl = absoluteUrl(locale, canonical);
+const ogImage = absoluteUrl(locale, image);
+const otherLocales = LOCALES.filter((l) => l !== locale);
 ---
 
 <meta charset="UTF-8" />
@@ -27,26 +32,43 @@ const language = SITE.language;
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
-<meta name="language" content={language} />
+<meta name="keywords" content={SITE.keywordsByLocale[locale]} />
+<meta name="language" content={meta.htmlLang} />
+<meta name="author" content={SITE.nameByLocale[locale]} />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="geo.region" content="MY-13" />
+<meta name="geo.placename" content="Sibu, Sarawak, Malaysia" />
+<meta name="geo.position" content={`${SITE.coordinates.lat};${SITE.coordinates.lng}`} />
+<meta name="ICBM" content={`${SITE.coordinates.lat}, ${SITE.coordinates.lng}`} />
 
-{site && <link rel="canonical" href={canonicalUrl} />}
+<link rel="canonical" href={canonicalUrl} />
+<link rel="alternate" hreflang={meta.hreflang} href={canonicalUrl} />
+{otherLocales.map((l) => (
+  <link rel="alternate" hreflang={LOCALE_META[l].hreflang} href={absoluteUrl(l, canonical)} />
+))}
+<link rel="alternate" hreflang="x-default" href={absoluteUrl('ms', canonical)} />
 
 <link rel="icon" type="image/svg+xml" href="/favicon-32.svg" sizes="32x32" />
 <link rel="icon" type="image/svg+xml" href="/favicon-16.svg" sizes="16x16" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="apple-touch-icon" type="image/svg+xml" href="/apple-touch-icon.svg" />
+<meta name="theme-color" content="#0b3b5c" />
 
-<meta property="og:type" content={ogType} />
-<meta property="og:locale" content={locale} />
-<meta property="og:site_name" content={SITE.name} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE.nameByLocale[locale]} />
+<meta property="og:locale" content={meta.ogLocale} />
+{otherLocales.map((l) => (
+  <meta property="og:locale:alternate" content={LOCALE_META[l].ogLocale} />
+))}
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-{site && <meta property="og:url" content={canonicalUrl} />}
+<meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={ogImage} />
+<meta property="og:image:alt" content={SITE.nameByLocale[locale]} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
 
-{site && <link rel="sitemap" type="application/xml" href={new URL('/sitemap-index.xml', site).toString()} />}
+<link rel="sitemap" type="application/xml" href={absoluteUrl('ms', '/sitemap-index.xml')} />
