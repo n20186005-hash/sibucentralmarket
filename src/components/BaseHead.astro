@@ -21,7 +21,7 @@ const {
 
 const meta = LOCALE_META[locale];
 const canonicalUrl = absoluteUrl(locale, canonical);
-const ogImage = absoluteUrl(locale, image);
+const ogImage = new URL(image, absoluteUrl('ms')).toString();
 const otherLocales = LOCALES.filter((l) => l !== locale);
 ---
 

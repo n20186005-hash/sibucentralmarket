@@ -45,7 +45,7 @@ export const LOCALE_META: Record<Locale, LocaleMeta> = {
   zh: {
     htmlLang: 'zh-Hans',
     ogLocale: 'zh_CN',
-    hreflang: 'zh',
+    hreflang: 'zh-Hans',
     label: '简体中文',
     short: '中文',
     numberLocale: 'zh-CN',
