@@ -98,3 +98,5 @@
   .lightbox-prev { left: 0.5rem; width: 2.5rem; height: 2.5rem; }
   .lightbox-next { right: 0.5rem; width: 2.5rem; height: 2.5rem; }
 }
+
+.header-row{padding-top:8px;padding-bottom:8px;}.desktop-navigation{overflow-x:auto;min-width:0;}.desktop-navigation a{white-space:nowrap;}@media(max-width:420px){.header-row{gap:8px;}.header-row>a img{width:100px;height:auto;}}

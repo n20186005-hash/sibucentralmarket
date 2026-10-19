@@ -1,6 +1,7 @@
 ---
+import { checks } from '@/i18n/checks';
 import { SITE } from '@/consts';
-import { LOCALE_META, type Locale } from '@/i18n/config';
+import { type Locale } from '@/i18n/config';
 import { UI } from '@/i18n/ui';
 
 type Props = { locale: Locale };
@@ -24,7 +25,7 @@ const quickLinks = ui.nav.filter((n) =>
       <p class="text-sm leading-relaxed text-rajang-200 max-w-md">{ui.footer.about}</p>
       <div class="mt-5 text-xs text-rajang-400 space-y-1">
         <p>📍 {ui.footer.addressLabel}: {SITE.address}</p>
-        <p>☎ {SITE.telephone} · {LOCALE_META[locale].label}</p>
+        <p>☎ {checks[locale].phone}: <a href={`tel:${SITE.telephone}`} class="underline">{SITE.telephone}</a></p>
       </div>
     </div>
     <div class="md:col-span-4">

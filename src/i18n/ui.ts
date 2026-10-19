@@ -78,17 +78,16 @@ export type UI = {
 export const UI: Record<Locale, UI> = {
   ms: {
     meta: {
-      title: 'Pasar Sentral Sibu Panduan Pelancongan',
-      description:
-        'Pasar tertutup terbesar di Malaysia dengan lebih 1,100 gerai di Jalan Channel, Sibu, Sarawak. Waktu operasi 6:00 AM – 6:00 PM, masuk percuma, panduan bahagian pasar, parkir, pengangkutan, makanan & Kek Lapis Sarawak.',
-    },
+  "title": "Pasar Sentral Sibu: Waktu, Makanan, Parkir & Peta",
+  "description": "Rancang lawatan Pasar Sentral Sibu di Jalan Channel: semak perbezaan waktu operasi, makanan, parkir Lembangan dan arah perjalanan. Panduan pelawat bebas."
+},
     hero: {
       badge: 'Sibu · Sarawak · Bumi Kenyalang',
-      subtitle: 'Pasar Tertutup TERBESAR di Malaysia · Lebih 1,100 Gerai',
-      ctaPrimary: 'Teroka Bahagian',
+      subtitle: "Pasar Sentral Sibu · Jalan Channel",
+      ctaPrimary: "Semak waktu & lokasi",
       ctaSecondary: 'Cara Ke Sana',
-      ratingSuffix: 'ulasan Google',
-      openHours: '6:00 AM – 6:00 PM · Setiap hari',
+      ratingSuffix: "ulasan Google Maps · 2026-10-19",
+      openHours: "Google Maps: 06:00–18:00 · lihat nota waktu",
     },
     nav: [
       { id: 'info-penting', label: 'Info Penting' },
@@ -103,13 +102,13 @@ export const UI: Record<Locale, UI> = {
       { id: 'peta', label: 'Peta' },
       { id: 'faq', label: 'FAQ' },
     ],
-    ctaButton: 'Lawati Kami',
+    ctaButton: "Semak waktu & lokasi",
     labels: {
       jarak: 'Jarak dari pasar',
       kadar: 'Kadar Bayaran',
       kapasiti: 'Kapasiti',
       langkah: 'Langkah-langkah',
-      petua: '💡 Petua Tempatan',
+      petua: "Perancangan",
       anggaranKos: 'Anggaran kos',
       lihatPeta: 'Lihat peta',
       bukaMaps: 'Buka dalam Google Maps',
@@ -143,97 +142,93 @@ export const UI: Record<Locale, UI> = {
     },
     sections: {
       bahagian: {
-        eyebrow: '6 Bahagian Utama · 2 Tingkat',
-        title: 'Susun atur Pasar Sentral Sibu',
-        desc: 'Bangunan 2 tingkat yang menggabungkan bekas Pasar Basah dan Pasar Lembangan (Dayak) asal. Aras bawah untuk hasil segar & basah, aras atas untuk pakaian, makanan, dan Kek Lapis. Navigasi laluan yang luas & berudara baik — sebuah muzium hidup budaya Sibu.',
-      },
+  "eyebrow": "Pasar Sentral Sibu · Jalan Channel",
+  "title": "Apa yang boleh dicari di Pasar Sentral Sibu?",
+  "desc": "Sarawak Tourism Board menerangkan pasar dua tingkat dengan hasil segar, barang kering, makanan dan kraftangan. Kategori di bawah ialah panduan belian, bukan pelan lokasi gerai."
+},
       galeri: {
         eyebrow: 'Galeri Gambar · Klik untuk Besar',
         title: 'Sekitar Pasar Sentral Sibu',
-        desc: 'Gambar sebenar Pasar Sentral Sibu — suasana gerai hasil hutan, mi kampua tingkat atas, tradisi ayam dibalut surat khabar, dan landskap Sungai Rejang yang mengiringi kunjungan anda di bandar Angsa (Swan Town).',
+        desc: "Galeri sedia ada untuk gambaran suasana; foto bukan bukti stok atau keadaan semasa.",
       },
       tiket: {
         eyebrow: 'Tiket & Yuran Masuk',
-        title: 'Kemasukan adalah PERCUMA untuk SEMUA',
-        desc: 'Tiada bayaran masuk dikenakan ke atas semua kategori pengunjung. Pasar Sentral Sibu adalah PASAR AWAM yang dibiayai oleh Majlis Bandaraya Sibu (MBS) untuk rakyat dan pelancong. Anda hanya membayar untuk barang belian, parkir, dan makanan sahaja.',
+        title: "Rancang belian dan perbelanjaan",
+        desc: "Ini pasar awam di bawah Majlis Perbandaran Sibu (SMC). Belian makanan, barangan dan parkir mempunyai caj masing-masing; panduan ini tidak menjual tiket atau menjanjikan diskaun.",
         tipsTitle: '💡 Tips Belian Cekap',
         tips: [
-          'Bawa WANG TUNAI secukupnya — kebanyakan gerai kecil tak terima kad.',
-          'Tawar harga secara sopan — biasa untuk buah, sayur, dan pakaian.',
-          'Datang sebelum 10 AM untuk pilihan hasil segar PALING lengkap.',
-          'Minta resit jika beli Kek Lapis atau barang untuk dihantar.',
-          'Sediakan duit syiling — banyak diperlukan untuk belian kecil (RM0.20–RM5).',
-        ],
+  "Bawa wang kecil sebagai pilihan bayaran.",
+  "Tanya dahulu jika hendak membayar tanpa tunai.",
+  "Semak ramuan, pembungkusan dan harga setiap unit."
+],
       },
       masa: {
         eyebrow: 'Masa Terbaik & Tempoh Lawatan',
-        title: 'Bila & berapa lama sebaiknya melawat Pasar Sentral Sibu?',
-        desc: 'Pasar dibuka sepanjang hari, namun jangka masa tertentu menawarkan pengalaman yang lebih baik. Sibu berada di zon iklim ekuatori — pagi sejuk dan petang sering kali hujan rencana di musim utara.',
+        title: "Bila hendak melawat?",
+        desc: "Waktu pasar tidak semestinya waktu setiap gerai. Pilih masa mengikut tujuan lawatan dan sahkan gerai pilihan terlebih dahulu.",
         cards: [
-          {
-            title: 'Waktu Pagi Segar',
-            level: 'TERBAIK · ⭐⭐⭐⭐⭐',
-            time: '7:00 AM – 10:00 AM',
-            bullets: [
-              'Hasil segar baru tiba dari pekan & sungai Rejang',
-              'Buah-buahan pilihan, ikan sungai baru diturunkan',
-              'Kurang sesak — ruang luas untuk memilih',
-              'Udara pagi Sibu masih sejuk & nyaman berjalan',
-            ],
-          },
-          {
-            title: 'Makan & Mi Kampua',
-            level: 'Bagus · ⭐⭐⭐⭐',
-            time: '11:00 AM – 2:00 PM',
-            bullets: [
-              'Food court tingkat atas penuh operasi',
-              'Masa terbaik cuba Mi Kampua + Sup Bola',
-              'Beli Kek Lapis sebelum pilihan habis',
-              'Parkir jalan lebih mudah selepas 11 pagi',
-            ],
-          },
-          {
-            title: 'Tempoh Disyorkan',
-            level: 'Kesesuaian · ⭐⭐⭐⭐⭐',
-            time: '2 – 3 jam santai',
-            bullets: [
-              '1 jam: melintas pantas & beli keperluan sahaja',
-              '2.5 jam: pilih teliti + cuba makanan + beli Kek Lapis',
-              'Gabung Tua Pek Kong + Rejang Esplanade = setengah hari',
-              'Gabung Rumah Panjang Bawang Assan = sehari penuh',
-            ],
-          },
-        ],
+  {
+    "title": "Hasil segar",
+    "level": "Cadangan",
+    "time": "Pagi",
+    "bullets": [
+      "Pertimbangkan lawatan awal.",
+      "Jangan anggap semua hasil tersedia setiap hari."
+    ]
+  },
+  {
+    "title": "Makan",
+    "level": "Semak gerai",
+    "time": "Sebelum bertolak",
+    "bullets": [
+      "Tanya waktu sajian terakhir.",
+      "Sahkan keperluan diet dan ramuan."
+    ]
+  },
+  {
+    "title": "Lawatan santai",
+    "level": "Anggaran",
+    "time": "1–2 jam",
+    "bullets": [
+      "Tambah masa untuk makan atau membeli.",
+      "Semak cuaca sebelum berjalan ke tepi sungai."
+    ]
+  }
+],
         dayTitle: '📅 Hari paling sesuai untuk melawat',
         days: [
-          { label: 'Isnin – Jumaat:', text: 'Pilihan lengkap, kurang pelancong, ruang luas untuk memilih & tawar harga.' },
-          { label: 'Sabtu & Ahad:', text: 'Paling MERIAH! Ramai keluarga tempatan & pelancong. Cuba elak puncak 9–11 pagi.' },
-          { label: 'Cuti Umum & Gawai (Jun):', text: 'Beberapa gerai etnik tutup tetapi ada gerai khas jual hasil perayaan.' },
-          { label: 'Musim Durian (Nov–Jan):', text: 'Waktu TERBAIK jika peminat Raja Buah — gerai khas di depan pasar!' },
-        ],
+  {
+    "label": "Hari biasa / hujung minggu",
+    "text": "Waktu dan stok setiap gerai boleh berbeza."
+  },
+  {
+    "label": "Cuti umum",
+    "text": "Hubungi gerai atau pihak pasar sebelum perjalanan khas."
+  }
+],
         climateTitle: '🌤️ Iklim Sibu · Bumi Kenyalang',
         climate:
-          'Suhu sepanjang tahun antara 23°C – 33°C dengan kelembapan melebihi 80%. Musim hujan utama November – Februari (hujan petang). Musim kemarau lebih jelas Mei – Ogos. Bawa payung mini untuk lindungan matahari & hujan, serta botol air minuman — berjalan 2 jam di pasar haba badan akan naik!',
+          "Bawa air minuman dan payung. Semak ramalan cuaca pada hari lawatan serta keadaan laluan selepas hujan.",
       },
       parkir: {
         eyebrow: 'Maklumat Parkir Kenderaan',
         title: 'Di mana hendak letak kereta berhampiran Pasar Sentral Sibu?',
-        desc: 'Parkir di Jalan Channel adalah terhad dan cepat penuh pada waktu pagi. Berikut adalah pilihan tempat parkir terbaik berhampiran Pasar Sentral Sibu untuk rujukan anda.',
+        desc: "Kompleks parkir bertingkat Lembangan terletak bersebelahan pasar menurut SMC. Kadar dan kekosongan semasa perlu disemak di lokasi.",
       },
       pengangkutan: {
         eyebrow: 'Pengangkutan Terperinci',
-        title: '7 cara ke Pasar Sentral Sibu',
-        desc: 'Dari Lapangan Terbang Sibu (SBW), stesen bas, Terminal Bot Ekspres, dan sekitar bandar. Panduan langkah demi langkah lengkap termasuk anggaran kos dan petua tempatan yang sebenarnya.',
+        title: "Cara ke Jalan Channel",
+        desc: "Gunakan pin Pasar Sentral Sibu. Semak harga dan anggaran perjalanan semasa; panduan ini tidak mengesahkan jadual bas atau bot tertentu.",
       },
       makanan: {
-        eyebrow: 'Makanan Berdekatan · 6 Pilihan Terbaik',
-        title: 'Di mana hendak makan & minum berhampiran pasar?',
-        desc: 'Dari food court tingkat atas pasar (Mi Kampua RM5!), ke lorong kedai kopi Fuzhou di kaki bukit Tua Pek Kong, ke restoran masakan ulam hutan. Semua pilihan dalam 700m dari Pasar Sentral Sibu.',
+        eyebrow: "Makanan di dalam dan sekitar pasar",
+        title: "Makanan di dalam dan sekitar pasar",
+        desc: "Gerai dan menu boleh berubah. Semak harga, ramuan serta status halal dengan gerai masing-masing.",
       },
       tempatMenarik: {
         eyebrow: 'Tempat Menarik Berdekatan',
         title: 'Gabungkan lawatan anda di Sibu',
-        desc: 'Pasar Sentral terletak di jantung Bandar Sibu. Manfaatkan lokasi strategik untuk meneroka tempat menarik berhampiran — dari Kuil Tua Pek Kong di bukit, ke Pusat Warisan Sibu, Rumah Panjang Iban di sungai Rejang, sehingga menara membeli-belah Wisma Sanyan.',
+        desc: "Pertimbangkan singgahan bandar berikut; semak waktu akses dan laluan secara berasingan.",
       },
       peta: {
         eyebrow: 'Peta Lokasi Interaktif',
@@ -244,28 +239,45 @@ export const UI: Record<Locale, UI> = {
       faq: {
         eyebrow: 'Soalan Lazim',
         title: 'FAQ · Soalan yang sering ditanya tentang Pasar Sentral Sibu',
-        desc: 'Jawapan lengkap untuk persoalan paling kerap diajukan oleh pelawat sebelum dan semasa melawat Pasar Sentral Sibu — waktu operasi, cara tawar harga, makanan wajib cuba, parkir, petua bergambar, hinggalah musim durian Sarawak.',
+        desc: "Jawapan ringkas tentang waktu yang bercanggah, lokasi, parkir, belian dan kemudahan.",
       },
       sumber: {
         eyebrow: 'Rujukan Rasmi',
         title: 'Sumber rasmi & pautan luar',
-        desc: 'Laman ini ialah panduan pelawat tidak rasmi. Sila rujuk pautan berikut untuk pengesahan maklumat terkini sebelum merancang perjalanan ke Sibu.',
+        desc: "Sumber awam dan pautan rujukan; semak maklumat khusus dengan pengendali.",
         links: [
-          { name: 'Google Maps — Pasar Sentral Sibu', url: 'https://maps.app.goo.gl/HYSyTqsXHgBokYvu5', note: 'Lokasi, ulasan & navigasi' },
-          { name: 'Majlis Bandaraya Sibu (SMC)', url: 'https://smc.gov.my/', note: 'Pengurusan pasar awam Sibu' },
-          { name: 'Sarawak Tourism Board', url: 'https://sarawaktourism.com/', note: 'Maklumat pelancongan negeri' },
-        ],
+  {
+    "name": "Google Maps — Sibu Central Market",
+    "url": "https://maps.app.goo.gl/HYSyTqsXHgBokYvu5",
+    "note": "Disemak 2026-10-19"
+  },
+  {
+    "name": "Sarawak Tourism Board — Sibu Central Market",
+    "url": "https://www.sarawaktourism.com/web/places-to-visit/town-view/sibu/major-attractions/sibu-central-market",
+    "note": "Disemak 2026-10-19"
+  },
+  {
+    "name": "Sarawak Tourism Board — Sibu",
+    "url": "https://www.sarawaktourism.com/web/places-to-visit/town-view/sibu",
+    "note": "Semak sebelum datang"
+  },
+  {
+    "name": "Majlis Perbandaran Sibu (SMC) — Lembangan",
+    "url": "https://smc.gov.my/web/subpage/webpage_view/726",
+    "note": "Bersebelahan pasar"
+  }
+],
       },
     },
     footer: {
       about:
-        'Panduan pelawat tidak rasmi untuk Pasar Sentral Sibu — pasar tertutup terbesar di Malaysia, terletak di Jalan Channel bertentangan Terminal Bot Ekspres Sibu. Meneroka hasil hutan Sarawak, warisan Fuzhou, dan cita rasa mi kampua yang tersohor.',
+        "Panduan pelawat bebas untuk Pasar Sentral Sibu di Jalan Channel.",
       quickTitle: 'Pautan Pantas',
       disclaimerTitle: 'Penafian Tidak Rasmi',
       disclaimer: [
-        'Laman web ini adalah inisiatif panduan pelawat bebas dan TIDAK dikendalikan, dikeluarkan, atau diwakili oleh pihak pengurusan Pasar Sentral Sibu, Majlis Bandaraya Sibu (MBS), Tourism Sarawak, atau mana-mana agensi kerajaan Persekutuan atau Negeri Sarawak.',
-        'Rujuk pihak pengurusan pasar di talian +60 84-313 449 atau laman web rasmi Sarawak Tourism Board untuk pengesahan maklumat terkini sebelum merancang perjalanan anda ke Sibu.',
-      ],
+  "Laman ini tidak dikendalikan oleh pasar, Majlis Perbandaran Sibu atau Sarawak Tourism Board.",
+  "Google Maps menunjukkan 06:00–18:00 setiap hari; Sarawak Tourism Board menyenaraikan 06:00–23:00. Kedua-duanya disemak pada 19 Oktober 2026. Waktu gerai berbeza dan sumber ini tidak mengesahkan semua gerai dibuka sehingga malam. Hubungi nombor pada peta, +60 84-313 449, atau gerai pilihan sebelum lawatan lewat."
+],
       copyright: 'Panduan pelawat tidak rasmi · Swan Town, Sarawak.',
       backToTop: 'Kembali ke atas',
       addressLabel: 'Alamat',
@@ -274,17 +286,16 @@ export const UI: Record<Locale, UI> = {
 
   en: {
     meta: {
-      title: 'Sibu Central Market Travel Guide',
-      description:
-        'Malaysia’s largest indoor market with 1,100+ stalls on Jalan Channel, Sibu, Sarawak. Open 6:00 AM – 6:00 PM, free entry. Market layout, parking, how to get there from Sibu Airport, food, and Sarawak layer cake.',
-    },
+  "title": "Sibu Central Market: Hours, Food, Parking & Directions",
+  "description": "Plan Sibu Central Market on Jalan Channel: compare opening-hour sources, find food and Lembangan parking, and get directions. Independent visitor guide."
+},
     hero: {
       badge: 'Sibu · Sarawak · Borneo',
-      subtitle: 'Malaysia’s LARGEST indoor market · 1,100+ stalls',
-      ctaPrimary: 'Explore sections',
+      subtitle: "Sibu Central Market · Pasar Sentral Sibu",
+      ctaPrimary: "Check hours & location",
       ctaSecondary: 'How to get there',
-      ratingSuffix: 'Google reviews',
-      openHours: '6:00 AM – 6:00 PM · Daily',
+      ratingSuffix: "Google Maps reviews · 2026-10-19",
+      openHours: "Google Maps: 06:00–18:00 · see hours note",
     },
     nav: [
       { id: 'info-penting', label: 'Key Info' },
@@ -299,13 +310,13 @@ export const UI: Record<Locale, UI> = {
       { id: 'peta', label: 'Map' },
       { id: 'faq', label: 'FAQ' },
     ],
-    ctaButton: 'Visit Us',
+    ctaButton: "Check hours & location",
     labels: {
       jarak: 'Distance from market',
       kadar: 'Parking rate',
       kapasiti: 'Capacity',
       langkah: 'Step-by-step',
-      petua: '💡 Local tip',
+      petua: "Planning note",
       anggaranKos: 'Estimated cost',
       lihatPeta: 'View map',
       bukaMaps: 'Open in Google Maps',
@@ -339,97 +350,93 @@ export const UI: Record<Locale, UI> = {
     },
     sections: {
       bahagian: {
-        eyebrow: '6 main sections · 2 floors',
-        title: 'How Sibu Central Market is laid out',
-        desc: 'A two-storey building that merges the old wet market with the Dayak “Pasar Lembangan”. The ground floor is for fresh and wet produce, the upper floor for clothing, food and Sarawak layer cake. Wide, well-ventilated aisles make it a living museum of Sibu culture.',
-      },
+  "eyebrow": "Sibu Central Market · Pasar Sentral Sibu",
+  "title": "What can you look for at Sibu Central Market?",
+  "desc": "Sarawak Tourism Board describes a two-storey market with fresh produce, dry goods, food and crafts. These categories are shopping ideas, not a stall-location plan."
+},
       galeri: {
         eyebrow: 'Photo gallery · click to enlarge',
         title: 'Around Sibu Central Market',
-        desc: 'Real photographs of Sibu Central Market — jungle-produce stalls, Mi Kampua on the upper floor, the newspaper-wrapped chicken tradition, and the Rejang riverfront that frames your visit to the Swan Town.',
+        desc: "Existing photographs offer an impression of the market, not proof of current stock or conditions.",
       },
       tiket: {
         eyebrow: 'Tickets & entrance fees',
-        title: 'Entry is FREE for everyone',
-        desc: 'No entrance fee is charged for any visitor category. Sibu Central Market is a PUBLIC market run by the Sibu Municipal Council (SMC) for locals and travellers alike. You only pay for what you buy, for parking and for food.',
+        title: "Plan purchases and other costs",
+        desc: "This public market falls under Sibu Municipal Council (SMC). Food, shopping and parking have their own charges; this guide does not sell tickets or promise discounts.",
         tipsTitle: '💡 Smart shopping tips',
         tips: [
-          'Bring enough CASH — most small stalls do not accept cards.',
-          'Bargain politely — normal for fruit, vegetables and clothing.',
-          'Arrive before 10 AM for the fullest choice of fresh produce.',
-          'Ask for a receipt when buying layer cake or goods to ship.',
-          'Keep small change handy — very useful for small purchases (RM0.20–RM5).',
-        ],
+  "Carry small cash as a payment option.",
+  "Ask before relying on cashless payment.",
+  "Check ingredients, packaging and unit prices."
+],
       },
       masa: {
         eyebrow: 'Best time & how long to stay',
-        title: 'When to visit Sibu Central Market and how long to spend',
-        desc: 'The market is open all day, but certain hours give a much better experience. Sibu sits in an equatorial climate zone — cool mornings and frequent afternoon showers during the monsoon.',
+        title: "When should you visit?",
+        desc: "Market hours are not necessarily individual stall hours. Choose a time for your purpose and confirm your preferred stall before travelling.",
         cards: [
-          {
-            title: 'Fresh morning hours',
-            level: 'BEST · ⭐⭐⭐⭐⭐',
-            time: '7:00 AM – 10:00 AM',
-            bullets: [
-              'Fresh produce just in from upriver and the Rejang',
-              'Best fruit selection, river fish just unloaded',
-              'Less crowded — plenty of room to choose',
-              'Sibu mornings are still cool and pleasant to walk',
-            ],
-          },
-          {
-            title: 'Eating & Mi Kampua',
-            level: 'Good · ⭐⭐⭐⭐',
-            time: '11:00 AM – 2:00 PM',
-            bullets: [
-              'Upper-floor food court running at full tilt',
-              'Best time to try Mi Kampua + meatball soup',
-              'Buy layer cake before the choice sells out',
-              'Street parking easier after 11 AM',
-            ],
-          },
-          {
-            title: 'Recommended duration',
-            level: 'Fit · ⭐⭐⭐⭐⭐',
-            time: '2 – 3 relaxed hours',
-            bullets: [
-              '1 hour: quick walk-through and essentials only',
-              '2.5 hours: browse properly, eat, and buy layer cake',
-              'Add Tua Pek Kong + Rejang Esplanade = half a day',
-              'Add Bawang Assan longhouse = a full day',
-            ],
-          },
-        ],
+  {
+    "title": "Fresh produce",
+    "level": "Suggestion",
+    "time": "Morning",
+    "bullets": [
+      "Consider visiting early.",
+      "Do not assume every product is stocked daily."
+    ]
+  },
+  {
+    "title": "Food visit",
+    "level": "Check the stall",
+    "time": "Before travelling",
+    "bullets": [
+      "Ask about last food orders.",
+      "Confirm ingredients and dietary needs."
+    ]
+  },
+  {
+    "title": "Leisurely visit",
+    "level": "Estimate",
+    "time": "1–2 hours",
+    "bullets": [
+      "Allow extra time to eat or shop.",
+      "Check the weather before a riverfront walk."
+    ]
+  }
+],
         dayTitle: '📅 Best days to visit',
         days: [
-          { label: 'Monday – Friday:', text: 'Full selection, fewer tourists, plenty of room to browse and bargain.' },
-          { label: 'Saturday & Sunday:', text: 'Most LIVELY! Local families and visitors. Avoid the 9–11 AM peak.' },
-          { label: 'Public holidays & Gawai (June):', text: 'Some ethnic stalls close, but special festive stalls appear.' },
-          { label: 'Durian season (Nov–Jan):', text: 'BEST time for durian lovers — dedicated stalls out front!' },
-        ],
+  {
+    "label": "Weekdays / weekends",
+    "text": "Stall hours and stock can differ."
+  },
+  {
+    "label": "Public holidays",
+    "text": "Contact the stall or market before making a special trip."
+  }
+],
         climateTitle: '🌤️ Sibu climate · Land of the Hornbills',
         climate:
-          'Temperatures stay between 23°C and 33°C year round with humidity above 80%. The main rainy season runs November to February (afternoon showers); the drier spell is roughly May to August. Bring a small umbrella for sun and rain, plus a water bottle — two hours in the market will warm you up.',
+          "Carry drinking water and an umbrella. Check the forecast for your visit and walking conditions after rain.",
       },
       parkir: {
         eyebrow: 'Parking information',
         title: 'Where to park near Sibu Central Market',
-        desc: 'Parking along Jalan Channel is limited and fills up quickly in the morning. These are the best parking options near Sibu Central Market.',
+        desc: "SMC identifies the Lembangan multi-storey car park beside the market. Check current tariffs and available spaces on arrival.",
       },
       pengangkutan: {
         eyebrow: 'Getting here in detail',
-        title: '7 ways to reach Sibu Central Market',
-        desc: 'From Sibu Airport (SBW), the bus station, the Express Boat Terminal and around town. Full step-by-step directions with estimated costs and honest local tips.',
+        title: "Getting to Jalan Channel",
+        desc: "Use the Sibu Central Market map pin. Check current fares and travel estimates; this guide does not confirm particular bus or boat schedules.",
       },
       makanan: {
-        eyebrow: 'Food nearby · 6 best picks',
-        title: 'Where to eat and drink near the market',
-        desc: 'From the market’s own upper-floor food court (Mi Kampua for RM5!), to the Fuzhou kopitiam lane below Tua Pek Kong hill, to a restaurant serving wild jungle salads. All within 700 m of Sibu Central Market.',
+        eyebrow: "Eating in and around the market",
+        title: "Eating in and around the market",
+        desc: "Stalls and menus change. Confirm prices, ingredients and halal status with each vendor.",
       },
       tempatMenarik: {
         eyebrow: 'Nearby attractions',
         title: 'Combine your Sibu visit',
-        desc: 'Sibu Central Market sits in the heart of Sibu town. Use its central location to reach nearby attractions — Tua Pek Kong temple on the hill, the Sibu Heritage Centre, Iban longhouses on the Rejang, and the Wisma Sanyan shopping tower.',
+        desc: "Consider these town stops and check their access hours and walking routes separately.",
       },
       peta: {
         eyebrow: 'Interactive location map',
@@ -440,28 +447,45 @@ export const UI: Record<Locale, UI> = {
       faq: {
         eyebrow: 'Frequently asked questions',
         title: 'FAQ · Common questions about Sibu Central Market',
-        desc: 'Complete answers to the questions visitors ask most before and during a visit to Sibu Central Market — opening hours, bargaining, must-try food, parking, photo etiquette and the Sarawak durian season.',
+        desc: "Practical answers about conflicting hours, location, parking, shopping and facilities.",
       },
       sumber: {
         eyebrow: 'Official references',
         title: 'Official sources & outbound links',
-        desc: 'This is an unofficial visitor guide. Please check the links below to confirm the latest information before planning your trip to Sibu.',
+        desc: "Public sources and reference links; confirm service-specific details with the operator.",
         links: [
-          { name: 'Google Maps — Sibu Central Market', url: 'https://maps.app.goo.gl/HYSyTqsXHgBokYvu5', note: 'Location, reviews & navigation' },
-          { name: 'Sibu Municipal Council (SMC)', url: 'https://smc.gov.my/', note: 'Authority managing Sibu public markets' },
-          { name: 'Sarawak Tourism Board', url: 'https://sarawaktourism.com/', note: 'State tourism information' },
-        ],
+  {
+    "name": "Google Maps — Sibu Central Market",
+    "url": "https://maps.app.goo.gl/HYSyTqsXHgBokYvu5",
+    "note": "Checked 2026-10-19"
+  },
+  {
+    "name": "Sarawak Tourism Board — Sibu Central Market",
+    "url": "https://www.sarawaktourism.com/web/places-to-visit/town-view/sibu/major-attractions/sibu-central-market",
+    "note": "Checked 2026-10-19"
+  },
+  {
+    "name": "Sarawak Tourism Board — Sibu",
+    "url": "https://www.sarawaktourism.com/web/places-to-visit/town-view/sibu",
+    "note": "Check before visiting"
+  },
+  {
+    "name": "Majlis Perbandaran Sibu (SMC) — Lembangan",
+    "url": "https://smc.gov.my/web/subpage/webpage_view/726",
+    "note": "Beside the market"
+  }
+],
       },
     },
     footer: {
       about:
-        'An unofficial visitor guide to Sibu Central Market — Malaysia’s largest indoor market, on Jalan Channel opposite the Sibu Express Boat Terminal. Explore Sarawak jungle produce, Fuzhou heritage and the famous Mi Kampua.',
+        "An independent visitor guide to Sibu Central Market on Jalan Channel.",
       quickTitle: 'Quick Links',
       disclaimerTitle: 'Unofficial disclaimer',
       disclaimer: [
-        'This site is an independent visitor guide and is NOT operated, issued or endorsed by the management of Sibu Central Market, the Sibu Municipal Council (SMC), Tourism Sarawak, or any federal or Sarawak state government agency.',
-        'Contact the market management on +60 84-313 449 or check the official Sarawak Tourism Board website to confirm the latest information before planning your trip to Sibu.',
-      ],
+  "This website is not operated by the market, Sibu Municipal Council or Sarawak Tourism Board.",
+  "Google Maps lists 06:00–18:00 daily; Sarawak Tourism Board lists 06:00–23:00. Both were checked on 19 October 2026. Individual stalls have different hours, and neither listing confirms that every stall trades late. Before an evening visit, contact your chosen stall or the number shown on Maps: +60 84-313 449."
+],
       copyright: 'Unofficial visitor guide · Swan Town, Sarawak.',
       backToTop: 'Back to top',
       addressLabel: 'Address',
@@ -470,17 +494,16 @@ export const UI: Record<Locale, UI> = {
 
   zh: {
     meta: {
-      title: '诗巫中央市场 旅游指南',
-      description:
-        '马来西亚最大室内市场，逾 1,100 个摊位，位于砂拉越诗巫 Jalan Channel。营业时间 6:00 AM – 6:00 PM，免费入场。含市场分区、停车、机场交通、美食与砂拉越千层糕完整攻略。',
-    },
+  "title": "诗巫中央市场｜营业时间、美食、停车与交通指南",
+  "description": "规划诗巫中央市场之旅：核对不同来源的营业时间，了解美食、Lembangan停车场及Jalan Channel交通。独立访客指南。"
+},
     hero: {
       badge: '诗巫 · 砂拉越 · 婆罗洲',
-      subtitle: '马来西亚最大室内市场 · 逾 1,100 个摊位',
-      ctaPrimary: '逛市场分区',
+      subtitle: "诗巫中央市场 · Pasar Sentral Sibu",
+      ctaPrimary: "查看时间与位置",
       ctaSecondary: '交通方式',
-      ratingSuffix: '条 Google 评价',
-      openHours: '6:00 AM – 6:00 PM · 每天营业',
+      ratingSuffix: "则Google Maps评价 · 2026-10-19",
+      openHours: "地图所列06:00–18:00 · 请看时间说明",
     },
     nav: [
       { id: 'info-penting', label: '重点资讯' },
@@ -495,13 +518,13 @@ export const UI: Record<Locale, UI> = {
       { id: 'peta', label: '地图' },
       { id: 'faq', label: '常见问题' },
     ],
-    ctaButton: '来逛市场',
+    ctaButton: "查看时间与位置",
     labels: {
       jarak: '距市场',
       kadar: '停车费率',
       kapasiti: '车位数量',
       langkah: '步骤',
-      petua: '💡 在地小贴士',
+      petua: "行程提示",
       anggaranKos: '预估费用',
       lihatPeta: '查看地图',
       bukaMaps: '在 Google 地图打开',
@@ -535,97 +558,93 @@ export const UI: Record<Locale, UI> = {
     },
     sections: {
       bahagian: {
-        eyebrow: '6 大分区 · 2 层楼',
-        title: '诗巫中央市场的楼层分区',
-        desc: '两层楼建筑，结合了原有的湿巴刹与达雅族「Pasar Lembangan」。楼下卖生鲜湿货，楼上卖服饰、美食与砂拉越千层糕。通道宽敞通风，宛如诗巫文化的活博物馆。',
-      },
+  "eyebrow": "诗巫中央市场 · Pasar Sentral Sibu",
+  "title": "诗巫中央市场可以买什么？",
+  "desc": "砂拉越旅游局介绍，市场有两层，售卖生鲜、干货、食品和手工艺品。以下是购物类别提示，并非具体摊位分布图。"
+},
       galeri: {
         eyebrow: '照片集 · 点击放大',
         title: '诗巫中央市场实拍',
-        desc: '诗巫中央市场的真实照片——森林物产摊位、楼上的干盘面、旧报纸包活鸡的传统，以及陪伴这趟旅程的拉让江河岸风光（天鹅城）。',
+        desc: "现有相册用于了解市场环境，不代表当天商品库存或现场状况。",
       },
       tiket: {
         eyebrow: '门票与费用',
-        title: '入场完全免费',
-        desc: '所有访客类别一律不收入场费。诗巫中央市场是由诗巫市议会（MBS）为市民与旅客经营的公共巴刹，您只需为购买的商品、停车与餐饮付费。',
+        title: "规划购物与其他开支",
+        desc: "这是诗巫市议会（SMC）管理的公共市场。食品、商品与停车各有收费；本指南不出售门票，也不承诺摊位折扣。",
         tipsTitle: '💡 精明采购小贴士',
         tips: [
-          '带足现金——多数小摊位不接受刷卡。',
-          '杀价要有礼貌——水果、蔬菜与服饰都很常见。',
-          '早上 10 点前抵达，生鲜选择最齐全。',
-          '买千层糕或要寄送的商品记得索取收据。',
-          '准备零钱——小额消费（RM0.20–RM5）很常用。',
-        ],
+  "准备零钱作为支付备选。",
+  "使用电子支付前先向摊主确认。",
+  "核对配料、包装与计价单位。"
+],
       },
       masa: {
         eyebrow: '最佳时间与建议停留',
-        title: '诗巫中央市场几点去最好？要逛多久？',
-        desc: '市场全天营业，但某些时段体验明显更好。诗巫属赤道气候——早晨凉爽，雨季午后常有雷阵雨。',
+        title: "什么时候去比较合适？",
+        desc: "市场整体时间不等于每个摊位的时间。根据购物或用餐目的安排行程，专程到访前先确认目标摊位。",
         cards: [
-          {
-            title: '清晨生鲜时段',
-            level: '最佳 · ⭐⭐⭐⭐⭐',
-            time: '7:00 AM – 10:00 AM',
-            bullets: [
-              '生鲜刚从上游乡镇与拉让江送达',
-              '水果选择最多，江鱼刚卸货',
-              '人潮较少，挑选空间大',
-              '诗巫清晨凉爽，走动舒适',
-            ],
-          },
-          {
-            title: '用餐与干盘面',
-            level: '不错 · ⭐⭐⭐⭐',
-            time: '11:00 AM – 2:00 PM',
-            bullets: [
-              '楼上美食中心全面营业',
-              '品尝干盘面 + 肉丸汤的最佳时间',
-              '趁口味齐全先买千层糕',
-              '11 点后路边停车较容易',
-            ],
-          },
-          {
-            title: '建议停留时间',
-            level: '合适 · ⭐⭐⭐⭐⭐',
-            time: '2 – 3 小时悠闲逛',
-            bullets: [
-              '1 小时：快速走一遍、只买必需品',
-              '2.5 小时：仔细挑选 + 用餐 + 买千层糕',
-              '加上大伯公庙 + 拉让河滨 = 半天',
-              '加上 Bawang Assan 长屋 = 一整天',
-            ],
-          },
-        ],
+  {
+    "title": "购买生鲜",
+    "level": "行程建议",
+    "time": "上午",
+    "bullets": [
+      "可以考虑早些到访。",
+      "不要假定每天都有同样的商品。"
+    ]
+  },
+  {
+    "title": "计划用餐",
+    "level": "先问摊位",
+    "time": "出发前",
+    "bullets": [
+      "确认最后点餐时间。",
+      "说明配料与饮食要求。"
+    ]
+  },
+  {
+    "title": "休闲参观",
+    "level": "时间估计",
+    "time": "1–2小时",
+    "bullets": [
+      "购物或用餐请另留时间。",
+      "前往河滨散步前查天气。"
+    ]
+  }
+],
         dayTitle: '📅 最适合造访的日子',
         days: [
-          { label: '周一至周五：', text: '货色齐全、旅客较少，挑选与杀价空间大。' },
-          { label: '周六与周日：', text: '最热闹！本地家庭与旅客都来，尽量避开 9–11 点高峰。' },
-          { label: '公共假期与丰收节（6 月）：', text: '部分族群摊位休息，但会出现节庆特产摊。' },
-          { label: '榴梿季（11 月–1 月）：', text: '榴梿迷最佳时机——市场前会有专属摊位！' },
-        ],
+  {
+    "label": "平日及周末",
+    "text": "摊位营业及库存安排可能不同。"
+  },
+  {
+    "label": "公共假日",
+    "text": "专程前往前先联系摊位或市场。"
+  }
+],
         climateTitle: '🌤️ 诗巫气候 · 犀鸟之乡',
         climate:
-          '全年气温介于 23°C 至 33°C，湿度超过 80%。主要雨季为 11 月至次年 2 月（午后阵雨），5 月至 8 月较为干燥。建议携带小雨伞遮阳挡雨，并自备饮用水——在市场逛两小时会明显发热。',
+          "携带饮水与雨伞，查看到访当天预报，雨后留意步行路线状况。",
       },
       parkir: {
         eyebrow: '停车资讯',
         title: '诗巫中央市场附近哪里停车？',
-        desc: 'Jalan Channel 路边车位有限，早上很快停满。以下是诗巫中央市场附近最实用的停车选择。',
+        desc: "市议会资料确认Lembangan多层停车场位于市场旁。实时空位与收费请以现场为准。",
       },
       pengangkutan: {
         eyebrow: '交通方式详解',
-        title: '前往诗巫中央市场的 7 种方式',
-        desc: '从诗巫机场（SBW）、巴士站、快艇码头与市区各处出发，含完整步骤、预估费用与实在的在地建议。',
+        title: "如何前往Jalan Channel",
+        desc: "导航请选择诗巫中央市场地点。请查询实时车资及路程估计，本指南不确认特定公交或船班时刻。",
       },
       makanan: {
-        eyebrow: '周边美食 · 6 个最佳选择',
-        title: '市场附近吃什么、喝什么？',
-        desc: '从市场楼上美食中心（干盘面 RM5！），到大伯公庙山脚的福州咖啡店街，再到主打野生山菜的餐馆，全部在诗巫中央市场 700 米内。',
+        eyebrow: "市场内及周边用餐",
+        title: "市场内及周边用餐",
+        desc: "摊位与菜单可能变化，请逐家确认价格、配料与清真状态。",
       },
       tempatMenarik: {
         eyebrow: '附近景点',
         title: '串成一日诗巫行程',
-        desc: '诗巫中央市场位于市中心，可顺势串联附近景点——山上的大伯公庙、诗巫文物中心、拉让江畔的伊班长屋，以及三洋大厦购物中心。',
+        desc: "可考虑以下市区景点，分别核对开放时间及步行路线。",
       },
       peta: {
         eyebrow: '互动位置地图',
@@ -636,28 +655,45 @@ export const UI: Record<Locale, UI> = {
       faq: {
         eyebrow: '常见问题',
         title: '常见问题 FAQ · 关于诗巫中央市场',
-        desc: '访客在造访诗巫中央市场前后最常问的问题完整解答——营业时间、杀价方式、必吃美食、停车、拍照礼仪，以及砂拉越榴梿季节。',
+        desc: "关于时间差异、位置、停车、购物与设施的实用解答。",
       },
       sumber: {
         eyebrow: '官方参考',
         title: '官方来源与外链',
-        desc: '本站为非官方旅客指南，规划诗巫行程前请以下列官方来源确认最新资讯。',
+        desc: "公开资料及参考链接；具体服务请向运营方确认。",
         links: [
-          { name: 'Google 地图 — 诗巫中央市场', url: 'https://maps.app.goo.gl/HYSyTqsXHgBokYvu5', note: '位置、评价与导航' },
-          { name: '诗巫市议会（SMC）', url: 'https://smc.gov.my/', note: '公共巴刹管理单位' },
-          { name: '砂拉越旅游局', url: 'https://sarawaktourism.com/', note: '州级旅游资讯' },
-        ],
+  {
+    "name": "Google Maps — Sibu Central Market",
+    "url": "https://maps.app.goo.gl/HYSyTqsXHgBokYvu5",
+    "note": "核对日期：2026-10-19"
+  },
+  {
+    "name": "Sarawak Tourism Board — Sibu Central Market",
+    "url": "https://www.sarawaktourism.com/web/places-to-visit/town-view/sibu/major-attractions/sibu-central-market",
+    "note": "核对日期：2026-10-19"
+  },
+  {
+    "name": "Sarawak Tourism Board — Sibu",
+    "url": "https://www.sarawaktourism.com/web/places-to-visit/town-view/sibu",
+    "note": "到访前确认"
+  },
+  {
+    "name": "Majlis Perbandaran Sibu (SMC) — Lembangan",
+    "url": "https://smc.gov.my/web/subpage/webpage_view/726",
+    "note": "市场旁"
+  }
+],
       },
     },
     footer: {
       about:
-        '诗巫中央市场非官方旅客指南——马来西亚最大室内市场，位于 Jalan Channel、诗巫快艇码头对面。探索砂拉越森林物产、福州移民文化与远近驰名的干盘面。',
+        "Jalan Channel诗巫中央市场独立访客指南。",
       quickTitle: '快捷链接',
       disclaimerTitle: '非官方声明',
       disclaimer: [
-        '本站为独立的旅客指南，并非由诗巫中央市场管理方、诗巫市议会（MBS）、砂拉越旅游局或任何联邦／砂拉越州政府机构经营、发布或授权。',
-        '规划诗巫行程前，请致电市场管理方 +60 84-313 449 或查阅砂拉越旅游局官方网站确认最新资讯。',
-      ],
+  "本网站并非市场、诗巫市议会或砂拉越旅游局运营。",
+  "2026年10月19日核对时，Google Maps显示每日06:00–18:00，砂拉越旅游局页面则列为06:00–23:00。各摊位营业时间不同，两种资料都不能保证每个摊位营业到晚上。计划晚间到访时，请先联系目标摊位，或拨打地图所列电话+60 84-313 449确认。"
+],
       copyright: '非官方旅客指南 · 天鹅城，砂拉越。',
       backToTop: '回到顶部',
       addressLabel: '地址',

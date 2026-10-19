@@ -3,15 +3,6 @@ import { absoluteUrl, DEFAULT_LOCALE, LOCALE_META, LOCALES, type Locale } from '
 import { CONTENT } from '@/i18n/content';
 import { UI } from '@/i18n/ui';
 
-const DAY_OF_WEEK = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-  'Sunday',
-];
 
 function imageUrl(path: string): string {
   return new URL(path, absoluteUrl(DEFAULT_LOCALE)).toString();
@@ -32,22 +23,9 @@ const GEO = {
   longitude: SITE.coordinates.lng,
 } as const;
 
-const OPENING_HOURS = {
-  '@type': 'OpeningHoursSpecification',
-  dayOfWeek: DAY_OF_WEEK,
-  opens: SITE.openingHours.opens,
-  closes: SITE.openingHours.closes,
-} as const;
 
-const AGGREGATE_RATING = {
-  '@type': 'AggregateRating',
-  ratingValue: String(SITE.ratingValue),
-  reviewCount: String(SITE.reviewCount),
-  bestRating: '5',
-  worstRating: '1',
-} as const;
 
-/** 主词条：同时具备 TouristAttraction 与 LocalBusiness 特征，避免重复实体 */
+/** Public place facts; third-party ratings and conflicting hours remain attributed in visible copy. */
 export function buildMarketSchema(locale: Locale) {
   const url = absoluteUrl(locale);
   const meta = LOCALE_META[locale];
@@ -55,7 +33,7 @@ export function buildMarketSchema(locale: Locale) {
 
   return {
     '@context': 'https://schema.org',
-    '@type': ['TouristAttraction', 'LocalBusiness'],
+    '@type': ['TouristAttraction', 'Place'],
     '@id': `${url}#market`,
     name,
     alternateName: SITE.alternateNameByLocale[locale],
@@ -73,19 +51,9 @@ export function buildMarketSchema(locale: Locale) {
     geo: GEO,
     hasMap: SITE.mapsUrl,
     telephone: SITE.telephone,
-    openingHoursSpecification: OPENING_HOURS,
-    aggregateRating: AGGREGATE_RATING,
-    priceRange: SITE.priceRange,
-    currenciesAccepted: 'MYR',
-    paymentAccepted: 'Cash, Touch ‘n Go, Boost, GrabPay',
-    isAccessibleForFree: true,
     publicAccess: true,
-    smokingAllowed: false,
-    servesCuisine: ['Malaysian', 'Sarawakian', 'Fuzhou Chinese', 'Iban / Dayak'],
-    availableLanguage: [...LOCALES],
     touristType: ['Cultural tourist', 'Food traveller', 'Shopper', 'Family visitor', 'Heritage tourist'],
-    additionalType: ['IndoorMarket', 'FarmersMarket', 'FoodCourt'],
-    sameAs: [SITE.mapsUrl, 'https://sarawaktourism.com/'],
+    sameAs: [SITE.mapsUrl],
   };
 }
 
@@ -102,7 +70,7 @@ export function buildSiteSchema(locale: Locale) {
         '@type': 'WebSite',
         '@id': `${home}#website`,
         url: home,
-        name: SITE.nameByLocale[locale],
+        name: UI[locale].footer.about,
         description: UI[locale].meta.description,
         inLanguage: meta.htmlLang,
         publisher: { '@id': `${home}#organization` },

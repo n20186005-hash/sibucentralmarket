@@ -2,6 +2,7 @@
 import { GALLERY, SITE, mapsEmbedUrl } from '@/consts';
 import { LOCALE_META, type Locale } from '@/i18n/config';
 import { CONTENT } from '@/i18n/content';
+import { checks } from '@/i18n/checks';
 import { UI } from '@/i18n/ui';
 
 type Props = { locale: Locale };
@@ -9,25 +10,17 @@ const { locale } = Astro.props;
 
 const ui = UI[locale];
 const c = CONTENT[locale];
+const checked = checks[locale];
 const meta = LOCALE_META[locale];
 const name = SITE.nameByLocale[locale];
 
-const priceBadge: Record<string, string> = {
-  low: 'bg-rajang-100 text-rajang-700',
-  mid: 'bg-swan-200 text-teak-700',
-  high: 'bg-chilli-100 text-chilli-700',
-};
-const floorBadge: Record<string, string> = {
-  bawah: 'bg-rajang-50 text-rajang-700 border-rajang-200',
-  atas: 'bg-teak-50 text-teak-700 border-teak-200',
-};
 const ratingCount = SITE.reviewCount.toLocaleString(meta.numberLocale);
 const galleryCount = GALLERY.length;
 ---
 
 <!-- SECTION 1: HERO -->
 <section id="hero" class="relative overflow-hidden">
-  <div class="relative h-[72vh] min-h-[520px] w-full">
+  <div class="relative h-[48vh] min-h-[300px] w-full">
     <img
       src={SITE.hero}
       alt={name}
@@ -55,7 +48,7 @@ const galleryCount = GALLERY.length;
         {ui.meta.description}
       </p>
       <div class="mt-7 flex flex-wrap items-center gap-3">
-        <a href="#bahagian" class="btn-primary !bg-rajang-900 hover:!bg-rajang-950 focus:!ring-rajang-400">
+        <a href="#info-penting" class="btn-primary !bg-rajang-900 hover:!bg-rajang-950 focus:!ring-rajang-400">
           {ui.hero.ctaPrimary}
         </a>
         <a href="#pengangkutan" class="btn-secondary !bg-white !text-rajang-900 !border-rajang-300 hover:!bg-swan-50">
@@ -64,7 +57,7 @@ const galleryCount = GALLERY.length;
       </div>
       <div class="mt-7 flex flex-wrap items-center gap-4 text-sm text-rajang-900">
         <span class="inline-flex items-center gap-2">
-          <span class="inline-flex gap-0.5 text-amber-500">★★★★★</span>
+          <span class="inline-flex gap-0.5 text-amber-500">★</span>
           <span class="font-bold text-black">{SITE.ratingValue.toFixed(1)}</span>
           <span class="text-rajang-800">· {ratingCount} {ui.hero.ratingSuffix}</span>
         </span>
@@ -112,6 +105,8 @@ const galleryCount = GALLERY.length;
   </div>
 </section>
 
+<section id="semakan" class="container pb-10"><div class="card p-6 border-l-4 border-rajang-700"><p class="text-sm font-bold">{checked.checked}</p><h2 class="font-display text-2xl font-bold mt-2">{checked.heading}</h2><p class="mt-3 leading-relaxed">{checked.hours}</p><div class="mt-4 flex flex-wrap gap-5"><a href={SITE.mapsUrl} target="_blank" rel="noopener noreferrer" class="underline font-bold">Google Maps</a><a href="https://www.sarawaktourism.com/web/places-to-visit/town-view/sibu/major-attractions/sibu-central-market" target="_blank" rel="noopener noreferrer" class="underline font-bold">Sarawak Tourism Board</a></div></div></section>
+
 <!-- SECTION 3: BAHAGIAN PASAR -->
 <section id="bahagian" class="scroll-mt-24 pattern-rajang">
   <div class="container py-16 md:py-20">
@@ -131,10 +126,10 @@ const galleryCount = GALLERY.length;
             <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-teak-100 text-teak-700 font-bold font-display">
               {String(i + 1).padStart(2, '0')}
             </span>
-            <span class={`chip-accent border ${floorBadge[p.floor]}`}>{ui.floorLabel[p.floor]}</span>
+
           </div>
           <h3 class="font-display text-xl font-bold text-rajang-900 leading-snug">{p.title}</h3>
-          <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-chilli-600">{p.tagline}</p>
+
           <p class="mt-2 text-sm text-rajang-700 leading-relaxed">{p.description}</p>
           <ul class="mt-4 flex flex-wrap gap-2">
             {p.items.map((it) => <li class="chip">{it}</li>)}
@@ -470,9 +465,7 @@ const galleryCount = GALLERY.length;
         <article class="card p-5 md:p-6">
           <div class="flex items-start justify-between gap-3 mb-3">
             <h3 class="font-display text-lg font-bold text-rajang-900 leading-snug">{m.name}</h3>
-            <span class={`shrink-0 inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${priceBadge[m.price]}`}>
-              {ui.priceLabel[m.price]}
-            </span>
+
           </div>
           <p class="text-xs font-semibold text-rajang-500 uppercase tracking-wider">{ui.labels.jarak}</p>
           <p class="text-sm font-semibold text-rajang-800">{m.distance}</p>

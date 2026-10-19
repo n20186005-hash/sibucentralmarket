@@ -12,8 +12,8 @@ export const SITE = {
   } as Record<Locale, string>,
   /** 各语言常见别名（用于 alternateName / 关键字） */
   alternateNameByLocale: {
-    ms: ['Pasar Sentral Sibu', 'Sibu Central Market', 'Pasar Besar Sibu', 'Pasar Tertutup Terbesar Malaysia'],
-    en: ['Sibu Central Market', 'Pasar Sentral Sibu', 'Sibu Wet Market', 'Largest Indoor Market Malaysia'],
+    ms: ['Pasar Sentral Sibu', 'Sibu Central Market', 'Pasar Besar Sibu'],
+    en: ['Sibu Central Market', 'Pasar Sentral Sibu', 'Sibu Wet Market'],
     zh: ['诗巫中央市场', '诗巫大巴刹', 'Sibu Central Market', 'Pasar Sentral Sibu'],
   } as Record<Locale, string[]>,
   /** 各语言关键字（meta keywords，辅助长尾语意） */
@@ -27,10 +27,10 @@ export const SITE = {
   telephone: '+6084313449',
   coordinates: {
     lat: 2.2875463,
-    lng: 111.8261527,
+    lng: 111.828733,
   },
   ratingValue: 4.2,
-  reviewCount: 10351,
+  reviewCount: 10414,
   priceRange: 'RM',
   openingHours: { opens: '06:00', closes: '18:00' },
   /** Google Maps 分享链接（GBP / 在地 SEO） */

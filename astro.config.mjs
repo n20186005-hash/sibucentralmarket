@@ -1,5 +1,4 @@
 // @ts-check
-import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import { defineConfig } from 'astro/config';
@@ -12,13 +11,15 @@ if (SITE_URL) {
   integrations.push(
     sitemap({
       changefreq: 'monthly',
+      filter: page => !/\/404(?:\.html|\/)?$/.test(page),
+      serialize(item) { item.links=[{lang:'ms-MY',url:SITE_URL+'/'},{lang:'en',url:SITE_URL+'/en/'},{lang:'zh-Hans',url:SITE_URL+'/zh/'},{lang:'x-default',url:SITE_URL+'/'}]; return item; },
       priority: 0.7,
       // 三语站点：在 sitemap-index 中为每种语言输出 xhtml:link 互指
       i18n: {
         defaultLocale: 'ms',
         locales: {
           ms: 'ms-MY',
-          en: 'en-US',
+          en: 'en',
           zh: 'zh-Hans',
         },
       },
@@ -36,9 +37,6 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
-  adapter: cloudflare({
-    imageService: 'passthrough',
-  }),
   integrations,
   vite: {
     build: {
