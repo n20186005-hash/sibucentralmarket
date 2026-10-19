@@ -51,16 +51,16 @@ node $env:LOCALAPPDATA\pnpm\.tools\pnpm\9.15.9\node_modules\pnpm\bin\pnpm.cjs in
 node node_modules\astro\astro.js build     # 产出 dist/
 ```
 
-> **线上现状（2026-09-21 核对）**：`https://sibucentralmarket.com/en/` 与 `/zh/` 仍返回 404，首页 `<head>` 未输出任何 `hreflang` —— 即线上仍是单语（ms）版本，本仓库的三语改造尚未部署。GSC 报表（近 3 个月点击 0 / 曝光 0）与「单一语言」诊断正对应于此：需先重新构建并部署，再回 GSC 提交 sitemap。
+> **线上现状（2026-10-19 核对）**：马来文、英文与中文内容页均已部署。三语页面输出对应的 canonical、hreflang 和 sitemap 条目；后续内容更新仍需重新构建并验证正式域名。
 
 ## SEO 检查清单
 
 - [x] `site` 已设为绝对域名 → canonical / OG 绝对 URL / sitemap 正常产出
 - [x] `hreflang`：`ms-MY` / `en` / `zh` + `x-default`；`og:locale` + `og:locale:alternate`
 - [x] `sitemap-index.xml` 内含三语 `xhtml:link` 互指；`robots.txt` 已声明 Sitemap
-- [x] 结构化数据：`TouristAttraction` + `LocalBusiness`（含 geo / openingHours / aggregateRating / hasMap）、`WebSite` + `WebPage`（`workTranslation` 语言互指）、`FAQPage`（与页面可见问答一一对应）
+- [x] 结构化数据：`TouristAttraction`、`WebSite`、`WebPage`、`FAQPage` 与页面可见问答对应；地图第三方评分与有冲突的营业时间不作为本站结构化评分/时间发布
 - [x] `<meta name="robots">` 明确 `index, follow, max-image-preview:large`（无 noindex）
-- [x] HSTS / 安全头由 `public/_headers` 下发；HTTP→HTTPS 301 需在 Cloudflare 控制台开启 Always Use HTTPS
+- [x] HSTS / 安全头由 `public/_headers` 下发；Worker 处理 HTTP 和 www 的规范 301 跳转
 - [ ] **待办（站外）**：在 Google Search Console 提交 `https://sibucentralmarket.com/sitemap-index.xml`
 - [ ] **待办（站外）**：建立 / 认领 Google 商家档案「Sibu Central Market」，官网栏位填入本站
 - [ ] **待办（站外）**：争取砂拉越旅游局、Tripadvisor、在地部落格的反向链接
